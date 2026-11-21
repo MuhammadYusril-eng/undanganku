@@ -394,10 +394,20 @@ p {
 
 .cover-names {
   font-family: var(--font-script);
-  font-size: clamp(3.1rem, 13vw, 4.4rem);
-  line-height: 1.08;
+  font-size: clamp(2.15rem, 8.2vw, 3.1rem);
+  line-height: 1.2;
   color: var(--gold-bright);
-  margin: 12px 0 20px;
+  margin: 10px 0 18px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.cover-names .amp-inline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.72em;
+  color: var(--gold);
+  margin: 0 4px;
 }
 
 .guest-card {
@@ -818,12 +828,33 @@ body.locked .hero {
 /* =========================================================
    8. LOVE GIFT: ROYAL METALLIC VIP CARD
    ========================================================= */
+.gift-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 20px;
+  align-items: stretch;
+}
+
+@media (min-width: 600px) {
+  .gift-grid.has-two {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gift-grid:not(.has-two) .vip-card {
+    max-width: 440px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
 .vip-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
   text-align: left;
-  padding: 28px 24px;
-  margin: 18px auto;
-  max-width: 460px;
+  padding: 24px 20px;
+  margin: 0;
+  width: 100%;
   border-radius: 20px;
   background: linear-gradient(135deg, #17332A 0%, #0C1C17 60%, #1C392F 100%);
   border: 1px solid rgba(200, 162, 82, 0.48);
@@ -855,11 +886,18 @@ body.locked .hero {
 
 .vip-card .no {
   font-family: var(--font-serif);
-  font-size: 1.65rem;
+  font-size: clamp(1.3rem, 4.2vw, 1.55rem);
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   color: var(--gold-bright);
   margin: 0 0 16px;
+  word-break: break-all;
+}
+
+.vip-card .btn {
+  align-self: flex-start;
+  margin-top: auto;
+  margin-left: 0;
 }
 
 /* =========================================================
@@ -1224,7 +1262,7 @@ html:not(.api-loading) .portrait-arch {
   <div class="gate-right" aria-hidden="true"></div>
   <div class="cover-arch">
     <span class="eyebrow">The Wedding Of</span>
-    <h1 class="cover-names"><span data-k="pria_panggilan"></span> &amp; <span data-k="wanita_panggilan"></span></h1>
+    <h1 class="cover-names"><span data-k="pria_panggilan"></span> <span class="amp-inline" aria-hidden="true">&amp;</span> <span data-k="wanita_panggilan"></span></h1>
     <div class="guest-card">
       <span>Kepada Yth. Bapak/Ibu/Saudara/i</span>
       <b id="guest">Tamu Undangan</b>
@@ -1477,18 +1515,20 @@ html:not(.api-loading) .portrait-arch {
       <h2 class="title-editorial">Tanda Kasih</h2>
       <p class="muted" style="max-width:460px;margin:0 auto 24px">Doa restu Bapak/Ibu/Saudara/i merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih, dapat disampaikan melalui:</p>
 
-      <div class="vip-card bank reveal-left">
-        <div class="vip-chip" aria-hidden="true"></div>
-        <p class="vip-bank" data-k="rek_bank"></p>
-        <p class="no" data-k="rek_no"></p>
-        <button class="btn btn-gold" onclick="salin(K.rek_no,this)">Salin No. Rekening</button>
-      </div>
+      <div class="gift-grid" id="giftGrid">
+        <div class="vip-card bank reveal-left">
+          <div class="vip-chip" aria-hidden="true"></div>
+          <p class="vip-bank" data-k="rek_bank"></p>
+          <p class="no" data-k="rek_no"></p>
+          <button class="btn btn-gold" onclick="salin(K.rek_no,this)">Salin No. Rekening</button>
+        </div>
 
-      <div class="vip-card bank reveal-right" id="bk2">
-        <div class="vip-chip" aria-hidden="true"></div>
-        <p class="vip-bank" data-k="rek2_bank"></p>
-        <p class="no" data-k="rek2_no"></p>
-        <button class="btn btn-gold" onclick="salin(K.rek2_no,this)">Salin No. Rekening</button>
+        <div class="vip-card bank reveal-right" id="bk2">
+          <div class="vip-chip" aria-hidden="true"></div>
+          <p class="vip-bank" data-k="rek2_bank"></p>
+          <p class="no" data-k="rek2_no"></p>
+          <button class="btn btn-gold" onclick="salin(K.rek2_no,this)">Salin No. Rekening</button>
+        </div>
       </div>
     </div>
   </section>
@@ -1654,7 +1694,9 @@ function paint(){
   $('kal1').href=kal(K.akad_waktu,'Akad nikah '+nm,K.akad_tempat);
   $('kal2').hidden=!K.resepsi_waktu;
   if(K.resepsi_waktu)$('kal2').href=kal(K.resepsi_waktu,'Resepsi '+nm,K.resepsi_tempat);
-  $('bk2').hidden=!K.rek2_no;
+  var hasRek2=!!K.rek2_no;
+  $('bk2').hidden=!hasRek2;
+  $('giftGrid').classList.toggle('has-two',hasRek2);
   $('au').src=K.musik||'';
   $('mus').hidden=!K.musik;
   syncMusicUI();
