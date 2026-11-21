@@ -1697,8 +1697,19 @@ function paint(){
   var hasRek2=!!K.rek2_no;
   $('bk2').hidden=!hasRek2;
   $('giftGrid').classList.toggle('has-two',hasRek2);
-  $('au').src=K.musik||'';
-  $('mus').hidden=!K.musik;
+  var a=$('au'),newSrc=K.musik||'';
+  if(newSrc){
+    if(a.getAttribute('src')!==newSrc){
+      var wasPlaying=!a.paused;
+      a.src=newSrc;
+      a.load();
+      if(wasPlaying)a.play().catch(function(){});
+    }
+  }else{
+    a.pause();
+    a.removeAttribute('src');
+  }
+  $('mus').hidden=!newSrc;
   syncMusicUI();
 }
 
@@ -1726,19 +1737,27 @@ function openInv(){
   $('cover').classList.add('open');
   document.body.classList.remove('locked');
   window.scrollTo(0,0);
+  var a=$('au');
+  if(K.musik){
+    if(!a.getAttribute('src'))a.src=K.musik;
+    a.play().then(function(){
+      syncMusicUI();
+    }).catch(function(){
+      syncMusicUI();
+    });
+  }
 }
 
 function syncMusicUI(){
   var a=$('au'),b=$('mus');
   if(!b||b.hidden)return;
-  var isPlaying=!a.paused && !a.ended && a.currentTime>=0 && a.readyState>0 && !a.muted;
   if(a.paused){
     b.classList.remove('playing');
     b.classList.add('paused');
     b.setAttribute('aria-pressed','false');
     b.setAttribute('aria-label','Musik dijeda — tekan untuk memutar musik latar');
     b.title='Musik dijeda (klik untuk memutar)';
-  }else if(isPlaying){
+  }else{
     b.classList.remove('paused');
     b.classList.add('playing');
     b.setAttribute('aria-pressed','true');
