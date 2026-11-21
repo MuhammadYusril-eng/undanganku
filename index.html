@@ -1,4 +1,27 @@
-<!-- ... existing code ... -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0B1915">
+<meta name="color-scheme" content="dark light">
+<title>Undangan Pernikahan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Pinyon+Script&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap">
+<style>
+/* =========================================================
+   ROYAL TERNATE EDITORIAL & BOTANICAL LUXURY — DESIGN TOKENS
+   ========================================================= */
+:root {
+  --emerald-deep: #0B1915;
+  --emerald-card: #11241E;
+  --emerald-line: rgba(200, 162, 82, 0.28);
+  --ivory-bg: #FBF8F1;
+  --ivory-card: #FFFFFF;
+  --ivory-line: #E6DEC8;
+  --ink-light: #F3EDE0;
+  --ink-light-muted: #B8B09E;
   --ink-dark: #16221E;
   --ink-dark-muted: #52615B;
   --gold: #C8A252;
@@ -15,8 +38,133 @@
   box-sizing: border-box;
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-<!-- ... existing code ... -->
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  background: var(--emerald-deep);
+  color: var(--ink-light);
+  font-family: var(--font-sans);
+  font-size: 0.96rem;
+  line-height: 1.75;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.locked {
+  overflow: hidden;
+  height: 100svh;
+}
+
+h1, h2, h3, .disp {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  margin: 0;
+}
+
+p {
+  margin: 0 0 14px;
+}
+
+/* =========================================================
+   LAYOUT RHYTHM: ALTERNATING EMERALD & WARM IVORY SECTIONS
+   ========================================================= */
+.sec-dark, .sec-ivory, footer {
+  position: relative;
+  width: 100%;
+  padding: 76px 20px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.sec-dark {
+  background: radial-gradient(circle at 50% 0%, #142B24 0%, var(--emerald-deep) 75%);
+  color: var(--ink-light);
+}
+
+.sec-ivory {
+  background: var(--ivory-bg);
+  color: var(--ink-dark);
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.sec-ivory .eyebrow {
+  color: var(--gold-dark);
+}
+
+.title-editorial {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 6vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.15;
+  margin-bottom: 18px;
+}
+
+.muted {
+  color: var(--ink-light-muted);
+}
+
+.sec-ivory .muted {
+  color: var(--ink-dark-muted);
+}
+
+.src {
+  font-size: 0.82rem;
+  color: var(--ink-light-muted);
+}
+
+.sec-ivory .src {
+  color: var(--ink-dark-muted);
+}
+
+.ar {
+  font-family: var(--font-arab);
+  font-size: clamp(1.55rem, 5vw, 2rem);
+  line-height: 2.2;
+  margin: 14px 0;
+  color: var(--gold-bright);
+}
+
+.sec-ivory .ar {
+  color: var(--emerald-deep);
+}
+
+.script-title {
+  font-family: var(--font-script);
+  font-weight: 400;
+  color: var(--gold-bright);
+  line-height: 1.1;
+}
+
+/* Ornamen Bintang Moloku Kie Raha */
 .kie-divider {
   display: flex;
   align-items: center;
@@ -26,29 +174,26 @@
   max-width: 240px;
   color: var(--gold);
 }
-.sec-ivory .kie-divider { color: var(--gold-dark); }
+
+.sec-ivory .kie-divider {
+  color: var(--gold-dark);
+}
+
 .kie-divider::before, .kie-divider::after {
   content: '';
   flex: 1;
   height: 1px;
   background: linear-gradient(90deg, transparent, currentColor, transparent);
-  opacity: 0.65;
-  transform: scaleX(0);
-  transition: transform 1.1s var(--ease-luxury) 0.2s;
+  opacity: 0.7;
 }
-.reveal.visible .kie-divider::before,
-.reveal.visible .kie-divider::after {
-  transform: scaleX(1);
-}
-.kie-divider svg {
-  width: 24px;
-  height: 24px;
-  flex-shrink: 0;
-  transition: transform 1.2s var(--ease-luxury) 0.15s;
-}
-.reveal.visible .kie-divider svg { transform: rotate(90deg); }
 
-/* Floating Ambient Gold Particles */
+.kie-divider svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+/* Partikel Emas Melayang Halus */
 .ambient-particles {
   position: absolute;
   inset: 0;
@@ -56,6 +201,7 @@
   pointer-events: none;
   z-index: 1;
 }
+
 .particle {
   position: absolute;
   width: 4px;
@@ -65,45 +211,221 @@
   opacity: 0;
   animation: floatGold var(--dur, 9s) ease-in-out infinite var(--del, 0s);
 }
+
 @keyframes floatGold {
   0%, 100% { transform: translateY(0) scale(0.7); opacity: 0; }
-  50% { transform: translateY(-42px) scale(1.25); opacity: 0.55; }
+  50% { transform: translateY(-38px) scale(1.25); opacity: 0.5; }
 }
 
-/* Background Image Helper with Rich Editorial Vignette */
+/* Background Image Helper */
 .bgimg {
-<!-- ... existing code ... -->
+  position: relative;
+  background-color: #0E201B;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bgimg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 19, 16, 0.68) 0%, rgba(11, 25, 21, 0.76) 55%, rgba(11, 25, 21, 0.96) 100%);
+  z-index: 0;
+}
+
+.bgimg > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--gold);
+  color: var(--ink-light);
+  background: transparent;
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 4px;
+  transition: transform 0.35s var(--ease-luxury), background-color 0.3s ease, color 0.3s ease, box-shadow 0.35s ease;
+}
+
+.sec-ivory .btn {
+  color: var(--ink-dark);
+  border-color: var(--gold-dark);
+}
+
 .btn:hover {
   background: var(--gold);
   color: #0B1915;
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(200, 162, 82, 0.3);
+  box-shadow: 0 10px 24px rgba(200, 162, 82, 0.28);
 }
-.btn:active { transform: translateY(0) scale(0.98); }
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
 .btn-gold {
   position: relative;
   overflow: hidden;
   background: linear-gradient(135deg, #DDB962 0%, #B68932 100%);
-  color: #0B1915;
+  color: #0B1915 !important;
   border: none;
   font-weight: 600;
-  box-shadow: 0 8px 24px rgba(200, 162, 82, 0.32);
+  box-shadow: 0 8px 24px rgba(200, 162, 82, 0.3);
 }
+
 .btn-gold::after {
   content: '';
   position: absolute;
-  top: -50%; left: -75%;
-  width: 50%; height: 200%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
   transform: rotate(25deg);
   transition: left 0.75s ease;
 }
-.btn-gold:hover::after { left: 135%; }
+
+.btn-gold:hover::after {
+  left: 135%;
+}
+
 .btn-gold:hover {
   background: linear-gradient(135deg, #E8C775 0%, #C5983E 100%);
-  color: #0B1915;
 }
-/* ... existing code ... -->
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   1. COVER OVERLAY (ROYAL GATE SPLIT DOORS)
+   ========================================================= */
+.cover {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(20px + env(safe-area-inset-top, 0px)) 20px calc(20px + env(safe-area-inset-bottom, 0px));
+  overflow: hidden;
+  transition: opacity 0.6s ease 0.55s, visibility 0s 1.15s;
+}
+
+.cover .gate-left,
+.cover .gate-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50.5%;
+  background: radial-gradient(circle at center, #142B24 0%, #091512 100%);
+  border-color: rgba(200, 162, 82, 0.38);
+  z-index: 1;
+  transition: transform 1.05s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.cover .gate-left {
+  left: 0;
+  border-right: 1px solid rgba(200, 162, 82, 0.38);
+}
+
+.cover .gate-right {
+  right: 0;
+  border-left: 1px solid rgba(200, 162, 82, 0.38);
+}
+
+.cover.open {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.cover.open .gate-left {
+  transform: translateX(-102%);
+}
+
+.cover.open .gate-right {
+  transform: translateX(102%);
+}
+
+.cover-arch {
+  position: relative;
+  z-index: 3;
+  width: min(88vw, 370px);
+  background: rgba(11, 25, 21, 0.86);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(200, 162, 82, 0.55);
+  border-radius: 999px 999px 24px 24px;
+  padding: 58px 24px 38px;
+  text-align: center;
+  box-shadow: 0 28px 65px rgba(0, 0, 0, 0.65);
+  transition: transform 0.65s var(--ease-luxury), opacity 0.5s ease;
+}
+
+.cover.open .cover-arch {
+  transform: scale(0.92) translateY(-16px);
+  opacity: 0;
+}
+
+.cover-arch::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(200, 162, 82, 0.25);
+  border-radius: 999px 999px 18px 18px;
+  pointer-events: none;
+}
+
+.cover-names {
+  font-family: var(--font-script);
+  font-size: clamp(3.1rem, 13vw, 4.4rem);
+  line-height: 1.08;
+  color: var(--gold-bright);
+  margin: 12px 0 20px;
+}
+
+.guest-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(200, 162, 82, 0.28);
+  border-radius: 14px;
+  padding: 12px 16px;
+  margin: 18px 0 22px;
+}
+
+.guest-card span {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--ink-light-muted);
+  margin-bottom: 2px;
+}
+
+.guest-card b {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--ink-light);
+}
+
+/* =========================================================
+   2. HERO SECTION
+   ========================================================= */
 .hero {
   min-height: 100svh;
   display: flex;
@@ -111,168 +433,329 @@
   align-items: center;
   justify-content: space-between;
   text-align: center;
-  padding: calc(56px + env(safe-area-inset-top, 0px)) 24px 110px;
+  padding: calc(52px + env(safe-area-inset-top, 0px)) 24px 104px;
   overflow: hidden;
-  transition: transform 1.4s var(--ease-luxury), filter 1.2s ease;
+  transition: transform 1.3s var(--ease-luxury), filter 1.1s ease;
 }
+
 body.locked .hero {
-  transform: scale(1.07);
-  filter: blur(2px);
+  transform: scale(1.05);
 }
+
 .hero-frame {
   position: absolute;
-  inset: 18px;
-  border: 1px solid rgba(200, 162, 82, 0.32);
-  border-radius: 24px;
+  inset: 16px;
+  border: 1px solid rgba(200, 162, 82, 0.3);
+  border-radius: 22px;
   pointer-events: none;
   z-index: 2;
-  transition: inset 1.3s var(--ease-luxury), opacity 1.2s ease;
 }
-body.locked .hero-frame { inset: 34px; opacity: 0.3; }
+
 .hero-center {
   margin: auto 0;
-  max-width: 540px;
-  transition: transform 1.2s var(--ease-luxury) 0.15s, opacity 1.1s ease 0.15s;
+  max-width: 560px;
+  width: 100%;
 }
-body.locked .hero-center { transform: translateY(24px); opacity: 0; }
+
 .hero-names {
   font-family: var(--font-script);
-  font-size: clamp(3.6rem, 16vw, 5.8rem);
-  line-height: 1.02;
+  font-size: clamp(3.5rem, 15vw, 5.6rem);
+  line-height: 1.05;
   color: var(--gold-bright);
-  margin: 12px 0 18px;
-  text-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  margin: 10px 0 18px;
+  text-shadow: 0 8px 30px rgba(0, 0, 0, 0.55);
 }
-/* ... existing code ... -->
+
+.hero-date-pill {
+  display: inline-block;
+  padding: 8px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(200, 162, 82, 0.45);
+  background: rgba(11, 25, 21, 0.65);
+  backdrop-filter: blur(6px);
+  font-family: var(--font-serif);
+  font-size: 1.12rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-light);
+}
+
+.scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-light-muted);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+  animation: pulseLine 2s ease-in-out infinite;
+}
+
+@keyframes pulseLine {
+  0%, 100% { transform: scaleY(0.6); opacity: 0.4; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+/* =========================================================
+   3. PROFIL MEMPELAI (WARM IVORY)
+   ========================================================= */
+.couple-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  align-items: center;
+  margin-top: 28px;
+}
+
+@media (min-width: 600px) {
+  .couple-grid {
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+  }
+}
+
 .person-card {
-  padding: 28px 18px;
+  padding: 30px 18px;
   border-radius: var(--radius-xl);
-  background: #FFFFFF;
+  background: var(--ivory-card);
   border: 1px solid var(--ivory-line);
-  box-shadow: 0 18px 45px rgba(22, 34, 30, 0.06);
-  position: relative;
-  transition: transform 0.5s var(--ease-luxury), box-shadow 0.5s var(--ease-luxury), border-color 0.4s ease;
+  box-shadow: 0 16px 40px rgba(22, 34, 30, 0.06);
+  transition: transform 0.45s var(--ease-luxury), box-shadow 0.45s var(--ease-luxury), border-color 0.35s ease;
 }
+
 .person-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(200, 162, 82, 0.55);
-  box-shadow: 0 26px 55px rgba(22, 34, 30, 0.11);
+  transform: translateY(-5px);
+  border-color: var(--gold);
+  box-shadow: 0 24px 50px rgba(22, 34, 30, 0.11);
 }
+
 .portrait-arch {
-<!-- ... existing code ... -->
+  position: relative;
+  width: 152px;
+  height: 192px;
+  margin: 0 auto 18px;
+  padding: 6px;
+  border-radius: 999px 999px 18px 18px;
+  border: 1.5px solid var(--gold);
+  background: var(--ivory-bg);
+}
+
+.portrait-arch img,
+.portrait-arch span {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px 999px 13px 13px;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #163028, #0B1915);
+  font-family: var(--font-script);
+  font-size: 3.8rem;
+  color: var(--gold-bright);
+}
+
+.person-name {
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--emerald-deep);
+  margin-bottom: 6px;
+}
+
+.person-parents {
+  font-size: 0.88rem;
+  color: var(--ink-dark-muted);
+  margin: 0;
+}
+
+.couple-amp {
+  font-family: var(--font-script);
+  font-size: 3.2rem;
+  color: var(--gold-dark);
+  line-height: 1;
+}
+
+/* =========================================================
+   4. AYAT SUCI QS. AR-RUM: 21
+   ========================================================= */
+.verse-box {
+  background: rgba(17, 36, 30, 0.72);
+  border: 1px solid var(--emerald-line);
+  border-radius: var(--radius-xl);
+  padding: 36px 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.verse-trans {
+  font-style: italic;
+  color: var(--ink-light);
+  max-width: 520px;
+  margin: 14px auto 12px;
+}
+
+/* =========================================================
+   5. COUNTDOWN & EVENT CARDS
+   ========================================================= */
+.cd {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 440px;
+  margin: 24px auto 32px;
+}
+
 .cd div {
-  background: #FFFFFF;
+  background: var(--ivory-card);
   border: 1px solid var(--ivory-line);
   border-radius: var(--radius-md);
-  padding: 16px 6px;
-  box-shadow: 0 10px 25px rgba(22, 34, 30, 0.05);
-  font-size: 0.74rem;
+  padding: 14px 4px;
+  box-shadow: 0 10px 24px rgba(22, 34, 30, 0.05);
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-dark-muted);
   transition: transform 0.35s var(--ease-luxury), border-color 0.35s ease;
 }
+
 .cd div:hover {
   transform: translateY(-4px);
   border-color: var(--gold);
 }
+
 .cd b {
   display: block;
   font-family: var(--font-serif);
-  font-size: clamp(1.85rem, 6vw, 2.4rem);
-  font-weight: 600;
+  font-size: clamp(1.8rem, 6vw, 2.35rem);
+  font-weight: 700;
   line-height: 1.1;
   color: var(--emerald-deep);
   margin-bottom: 4px;
-  transition: transform 0.28s var(--ease-luxury), color 0.28s ease;
+  transition: transform 0.25s ease, color 0.25s ease;
 }
+
 .cd b.tick-pop {
-  transform: scale(1.14);
+  transform: scale(1.12);
   color: var(--gold-dark);
 }
 
 .event-card {
   position: relative;
-  background: #FFFFFF;
+  background: var(--ivory-card);
   border: 1px solid var(--ivory-line);
   border-radius: var(--radius-xl);
-  padding: 34px 24px;
-  margin: 20px 0;
-  box-shadow: 0 16px 40px rgba(22, 34, 30, 0.06);
-  overflow: hidden;
-  transition: transform 0.45s var(--ease-luxury), box-shadow 0.45s var(--ease-luxury), border-color 0.4s ease;
+  padding: 32px 22px;
+  margin: 18px 0;
+  box-shadow: 0 16px 38px rgba(22, 34, 30, 0.06);
+  transition: transform 0.4s var(--ease-luxury), box-shadow 0.4s var(--ease-luxury), border-color 0.35s ease;
 }
+
 .event-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(200, 162, 82, 0.6);
-  box-shadow: 0 24px 52px rgba(22, 34, 30, 0.11);
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  box-shadow: 0 22px 48px rgba(22, 34, 30, 0.11);
 }
-.event-card::after {
+
+.event-card::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(115deg, transparent 30%, rgba(200, 162, 82, 0.09) 50%, transparent 70%);
-  transform: translateX(-100%);
-  transition: transform 0.9s var(--ease-luxury);
+  inset: 8px;
+  border: 1px solid rgba(200, 162, 82, 0.28);
+  border-radius: 17px;
   pointer-events: none;
 }
-.event-card:hover::after { transform: translateX(100%); }
-.event-card::before {
-<!-- ... existing code ... -->
-.motto-banner {
-  margin-top: 26px;
-  padding-top: 22px;
-  border-top: 1px solid rgba(197, 155, 67, 0.25);
+
+.event-card h3 {
+  font-size: 1.75rem;
+  color: var(--emerald-deep);
+  margin-bottom: 10px;
+}
+
+.event-time {
+  font-weight: 600;
+  color: var(--gold-dark);
+  margin-bottom: 6px;
+}
+
+.event-place {
+  color: var(--ink-dark-muted);
+  margin-bottom: 18px;
 }
 
 /* =========================================================
-   RANGKAIAN PROSESI & FILOSOFI ADAT (PENGGANTI GALERI)
+   6. ADAT TERNATE HERITAGE FRAME
+   ========================================================= */
+.heritage-frame {
+  position: relative;
+  background: linear-gradient(160deg, rgba(20, 43, 36, 0.85), rgba(11, 25, 21, 0.95));
+  border: 1px solid rgba(200, 162, 82, 0.42);
+  border-radius: var(--radius-xl);
+  padding: 38px 24px;
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.35);
+}
+
+.motto-banner {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(200, 162, 82, 0.28);
+}
+
+/* =========================================================
+   7. RANGKAIAN PROSESI ADAT (PENGGANTI GALERI)
    ========================================================= */
 .botanical-crest {
-  width: 110px;
+  width: 112px;
   height: 54px;
-  margin: 0 auto 14px;
+  margin: 0 auto 12px;
   color: var(--gold-dark);
 }
+
 .procession-timeline {
   position: relative;
-  margin: 34px auto 10px;
+  margin: 32px auto 6px;
   padding-left: 34px;
   text-align: left;
-  max-width: 520px;
+  max-width: 540px;
 }
+
 .procession-timeline::before {
   content: '';
   position: absolute;
   left: 11px;
-  top: 10px;
-  bottom: 14px;
-  width: 1.5px;
+  top: 12px;
+  bottom: 16px;
+  width: 2px;
   background: linear-gradient(180deg, var(--gold) 0%, rgba(142, 105, 32, 0.25) 100%);
-  transform-origin: top;
-  transform: scaleY(0);
-  transition: transform 1.4s var(--ease-luxury) 0.2s;
 }
-.reveal.visible .procession-timeline::before {
-  transform: scaleY(1);
-}
+
 .proc-step {
   position: relative;
-  background: #FFFFFF;
+  background: var(--ivory-card);
   border: 1px solid var(--ivory-line);
   border-radius: 18px;
-  padding: 20px 22px;
-  margin-bottom: 18px;
-  box-shadow: 0 12px 32px rgba(22, 34, 30, 0.05);
-  transition: transform 0.45s var(--ease-luxury), box-shadow 0.45s var(--ease-luxury), border-color 0.35s ease;
+  padding: 20px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 12px 30px rgba(22, 34, 30, 0.05);
+  transition: transform 0.4s var(--ease-luxury), border-color 0.35s ease, box-shadow 0.4s ease;
 }
-.proc-step:last-child { margin-bottom: 0; }
+
+.proc-step:last-child {
+  margin-bottom: 0;
+}
+
 .proc-step:hover {
   transform: translateX(6px);
   border-color: var(--gold);
-  box-shadow: 0 18px 40px rgba(22, 34, 30, 0.1);
+  box-shadow: 0 18px 38px rgba(22, 34, 30, 0.1);
 }
+
 .proc-node {
   position: absolute;
   left: -34px;
@@ -289,11 +772,13 @@ body.locked .hero-center { transform: translateY(24px); opacity: 0; }
   box-shadow: 0 0 0 4px var(--ivory-bg);
   transition: transform 0.4s var(--ease-luxury), background-color 0.3s ease;
 }
+
 .proc-step:hover .proc-node {
-  transform: scale(1.18) rotate(45deg);
+  transform: scale(1.15) rotate(45deg);
   background: var(--gold);
   color: var(--emerald-deep);
 }
+
 .proc-head {
   display: flex;
   align-items: center;
@@ -301,25 +786,28 @@ body.locked .hero-center { transform: translateY(24px); opacity: 0; }
   gap: 10px;
   margin-bottom: 6px;
 }
+
 .proc-tag {
   font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--gold-dark);
 }
+
 .proc-icon {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   color: var(--gold-dark);
   flex-shrink: 0;
 }
+
 .proc-step h3 {
   font-size: 1.42rem;
-  font-weight: 600;
   color: var(--emerald-deep);
   margin-bottom: 6px;
 }
+
 .proc-step p {
   margin: 0;
   font-size: 0.9rem;
@@ -328,100 +816,396 @@ body.locked .hero-center { transform: translateY(24px); opacity: 0; }
 }
 
 /* =========================================================
-   LOVE GIFT: ROYAL METALLIC VIP CARD
+   8. LOVE GIFT: ROYAL METALLIC VIP CARD
    ========================================================= */
 .vip-card {
   position: relative;
   text-align: left;
-  padding: 28px 26px;
-  margin: 18px 0;
+  padding: 28px 24px;
+  margin: 18px auto;
+  max-width: 460px;
   border-radius: 20px;
   background: linear-gradient(135deg, #17332A 0%, #0C1C17 60%, #1C392F 100%);
-  border: 1px solid rgba(197, 155, 67, 0.48);
+  border: 1px solid rgba(200, 162, 82, 0.48);
   color: var(--ink-light);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.32);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
   overflow: hidden;
-  transition: transform 0.45s var(--ease-luxury), box-shadow 0.45s var(--ease-luxury), border-color 0.4s ease;
+  transition: transform 0.4s var(--ease-luxury), border-color 0.35s ease;
 }
+
 .vip-card:hover {
-  transform: translateY(-5px) scale(1.01);
+  transform: translateY(-4px);
   border-color: var(--gold-bright);
-  box-shadow: 0 26px 56px rgba(0, 0, 0, 0.45);
 }
-.vip-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -120%;
-  width: 70%; height: 100%;
-  background: linear-gradient(105deg, transparent 20%, rgba(229, 196, 116, 0.14) 50%, transparent 80%);
-  transition: left 0.95s var(--ease-luxury);
-  pointer-events: none;
+
+.vip-chip {
+  width: 42px;
+  height: 30px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #E8C775, #A87B28);
+  margin-bottom: 18px;
+  opacity: 0.9;
 }
-.vip-card:hover::before { left: 140%; }
-.vip-card::after {
-<!-- ... existing code ... -->
+
+.vip-bank {
+  font-size: 0.88rem;
+  color: var(--ink-light-muted);
+  margin: 0 0 4px;
+}
+
+.vip-card .no {
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--gold-bright);
+  margin: 0 0 16px;
+}
+
+/* =========================================================
+   9. RSVP, WISHES & KELOLA LINK TAMU
+   ========================================================= */
+.rsvp-box {
+  background: var(--ivory-card);
+  border: 1px solid var(--ivory-line);
+  border-radius: var(--radius-xl);
+  padding: 28px 22px;
+  margin-top: 24px;
+  text-align: left;
+  box-shadow: 0 16px 38px rgba(22, 34, 30, 0.06);
+}
+
+label {
+  display: block;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-dark);
+  margin: 14px 0 6px;
+}
+
+.adm label {
+  color: var(--ink-light-muted);
+}
+
+input, select, textarea {
+  width: 100%;
+  font: inherit;
+  color: var(--ink-dark);
+  background: var(--ivory-bg);
+  border: 1px solid var(--ivory-line);
+  border-radius: var(--radius-md);
+  padding: 11px 14px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--gold-dark);
+  box-shadow: 0 0 0 3px rgba(200, 162, 82, 0.2);
+}
+
+textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+
+.wish {
+  text-align: left;
+  background: var(--ivory-card);
+  border: 1px solid var(--ivory-line);
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-top: 12px;
+}
+
+.wish b {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--emerald-deep);
+  margin-bottom: 2px;
+}
+
+.wish p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink-dark-muted);
+}
+
+.pg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 0;
+  border-top: 1px solid var(--ivory-line);
+  text-align: left;
+}
+
+.row span {
+  flex: 1;
+  font-weight: 500;
+}
+
+.row .btn {
+  padding: 6px 14px;
+  font-size: 0.82rem;
+}
+
+/* =========================================================
+   10. FLOATING BOTTOM NAVIGATION & MUSIC BUTTON
+   ========================================================= */
+.nav {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: rgba(11, 25, 21, 0.88);
+  border: 1px solid rgba(200, 162, 82, 0.38);
+  border-radius: 999px;
+  padding: 5px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  max-width: calc(100vw - 24px);
+}
+
+.nav button {
+  color: var(--ink-light-muted);
+  background: none;
+  border: 0;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 500;
+  padding: 8px 11px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.nav button:hover,
+.nav button.active {
+  background: var(--gold);
+  color: #0B1915;
+  font-weight: 600;
+}
+
+#mus {
+  position: fixed;
+  right: 16px;
+  bottom: calc(74px + env(safe-area-inset-bottom, 0px));
+  z-index: 30;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  background: rgba(11, 25, 21, 0.9);
+  color: var(--gold-bright);
+  cursor: pointer;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+#mus.playing {
+  animation: spinDisk 6s linear infinite;
+}
+
+@keyframes spinDisk {
+  to { transform: rotate(360deg); }
+}
+
 footer {
   background: var(--emerald-deep);
   color: var(--ink-light);
   border-top: 1px solid var(--emerald-line);
+  padding-bottom: 130px;
 }
-footer .container { padding-bottom: 130px; }
 
-/* Multi-Variant Scroll Reveal & Stagger System */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.9s var(--ease-luxury), transform 0.9s var(--ease-luxury);
+/* =========================================================
+   11. PANEL ADMIN (#admin)
+   ========================================================= */
+.adm {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--emerald-deep);
+  color: var(--ink-light);
+  overflow-y: auto;
+  padding: calc(24px + env(safe-area-inset-top, 0px)) 20px calc(48px + env(safe-area-inset-bottom, 0px));
 }
-.reveal-scale {
-  opacity: 0;
-  transform: scale(0.94) translateY(20px);
-  transition: opacity 0.95s var(--ease-luxury), transform 0.95s var(--ease-luxury);
+
+.adm .in {
+  max-width: 580px;
+  margin: 0 auto;
+  text-align: left;
 }
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-28px);
-  transition: opacity 0.9s var(--ease-luxury), transform 0.9s var(--ease-luxury);
+
+.adm fieldset {
+  border: 1px solid var(--emerald-line);
+  border-radius: 14px;
+  margin: 20px 0;
+  padding: 8px 16px 18px;
+  background: var(--emerald-card);
 }
-.reveal-right {
-  opacity: 0;
-  transform: translateX(28px);
-  transition: opacity 0.9s var(--ease-luxury), transform 0.9s var(--ease-luxury);
+
+.adm legend {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0 10px;
+  color: var(--gold-bright);
 }
-.reveal.visible,
-.reveal-scale.visible,
-.reveal-left.visible,
-.reveal-right.visible {
+
+.adm input, .adm select, .adm textarea {
+  background: #0B1915;
+  color: var(--ink-light);
+  border-color: var(--emerald-line);
+}
+
+.slot {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid var(--emerald-line);
+}
+
+.slot img {
+  width: 56px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #0B1915;
+  border: 1px solid var(--emerald-line);
+}
+
+.slot div {
+  flex: 1;
+  min-width: 0;
+}
+
+.slot input {
+  padding: 6px;
+  font-size: 0.82rem;
+}
+
+.rs {
+  padding: 10px 0;
+  border-top: 1px solid var(--emerald-line);
+}
+
+.rs b {
+  display: block;
+  color: var(--gold-bright);
+}
+
+.rs span {
+  color: var(--ink-light-muted);
+  font-size: 0.9rem;
+}
+
+/* =========================================================
+   12. SAFE PROGRESSIVE SCROLL REVEAL (ANTI-STUCK)
+   ========================================================= */
+html.js-anim .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.85s var(--ease-luxury), transform 0.85s var(--ease-luxury);
+}
+
+html.js-anim .reveal-scale {
+  opacity: 0;
+  transform: scale(0.95) translateY(18px);
+  transition: opacity 0.85s var(--ease-luxury), transform 0.85s var(--ease-luxury);
+}
+
+html.js-anim .reveal-left {
+  opacity: 0;
+  transform: translateX(-22px);
+  transition: opacity 0.85s var(--ease-luxury), transform 0.85s var(--ease-luxury);
+}
+
+html.js-anim .reveal-right {
+  opacity: 0;
+  transform: translateX(22px);
+  transition: opacity 0.85s var(--ease-luxury), transform 0.85s var(--ease-luxury);
+}
+
+html.js-anim .reveal.visible,
+html.js-anim .reveal-scale.visible,
+html.js-anim .reveal-left.visible,
+html.js-anim .reveal-right.visible {
   opacity: 1;
   transform: none;
 }
 
-/* Staggered Child Animations when Parent Reveals */
-.stagger-group .stagger-item {
+html.js-anim .stagger-group .stagger-item {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.75s var(--ease-luxury), transform 0.75s var(--ease-luxury);
+  transform: translateY(18px);
+  transition: opacity 0.7s var(--ease-luxury), transform 0.7s var(--ease-luxury);
 }
-.stagger-group.visible .stagger-item {
+
+html.js-anim .stagger-group.visible .stagger-item {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
-.stagger-group.visible .stagger-item:nth-child(1) { transition-delay: 0.08s; }
-.stagger-group.visible .stagger-item:nth-child(2) { transition-delay: 0.2s; }
-.stagger-group.visible .stagger-item:nth-child(3) { transition-delay: 0.32s; }
-.stagger-group.visible .stagger-item:nth-child(4) { transition-delay: 0.44s; }
+
+html.js-anim .stagger-group.visible .stagger-item:nth-child(1) { transition-delay: 0.06s; }
+html.js-anim .stagger-group.visible .stagger-item:nth-child(2) { transition-delay: 0.16s; }
+html.js-anim .stagger-group.visible .stagger-item:nth-child(3) { transition-delay: 0.26s; }
+html.js-anim .stagger-group.visible .stagger-item:nth-child(4) { transition-delay: 0.36s; }
 
 @media (prefers-reduced-motion: reduce) {
-  .cover, .gate-left, .gate-right, .reveal, .reveal-scale, .reveal-left, .reveal-right,
-  .stagger-group .stagger-item, .hero, .hero-frame, .hero-center, .particle { transition: none; animation: none; opacity: 1; transform: none; }
-  html { scroll-behavior: auto; }
-  #mus.playing { animation: none; }
+  .cover, .gate-left, .gate-right, .cover-arch, .hero, .particle {
+    transition: none !important;
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  #mus.playing {
+    animation: none;
+  }
 }
 </style>
 </head>
-<!-- ... existing code ... -->
+<body class="locked">
+
 <!-- =========================================================
-     FLOATING GLASSMORPHISM NAVIGATION & AUDIO CONTROL
+     1. SAMPUL GERBANG UNDANGAN (ROYAL GATE)
+     ========================================================= -->
+<div class="cover bgimg" id="cover" data-bg="foto_cover">
+  <div class="gate-left" aria-hidden="true"></div>
+  <div class="gate-right" aria-hidden="true"></div>
+  <div class="cover-arch">
+    <span class="eyebrow">The Wedding Of</span>
+    <h1 class="cover-names"><span data-k="pria_panggilan"></span> &amp; <span data-k="wanita_panggilan"></span></h1>
+    <div class="guest-card">
+      <span>Kepada Yth. Bapak/Ibu/Saudara/i</span>
+      <b id="guest">Tamu Undangan</b>
+    </div>
+    <button class="btn btn-gold" onclick="openInv()">Buka Undangan</button>
+  </div>
+</div>
+
+<!-- =========================================================
+     FLOATING NAVIGATION & AUDIO CONTROL
      ========================================================= -->
 <nav class="nav" aria-label="Navigasi Undangan">
   <button data-nav="home" class="active" onclick="go('home')">Home</button>
@@ -435,7 +1219,7 @@ footer .container { padding-bottom: 130px; }
 
 <main>
   <!-- =========================================================
-       1. HERO SECTION (EMERALD DARK)
+       2. HERO SECTION (EMERALD DARK)
        ========================================================= -->
   <header id="home" class="hero bgimg" data-bg="foto_cover">
     <div class="ambient-particles" aria-hidden="true">
@@ -456,7 +1240,20 @@ footer .container { padding-bottom: 130px; }
       <div class="scroll-line"></div>
     </div>
   </header>
-<!-- ... existing code ... -->
+
+  <!-- =========================================================
+       3. BASMALAH & PROFIL MEMPELAI (WARM IVORY)
+       ========================================================= -->
+  <section class="sec-ivory" id="mempelai">
+    <div class="container reveal">
+      <p class="ar" lang="ar" dir="rtl">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</p>
+      <p style="font-weight:600;font-size:1.05rem">Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
+      <p class="muted" style="max-width:480px;margin:0 auto 28px">Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i serta kerabat sekalian untuk menghadiri acara pernikahan kami:</p>
+
+      <div class="kie-divider" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12,1 14.8,9.2 23,12 14.8,14.8 12,23 9.2,14.8 1,12 9.2,9.2"/></svg>
+      </div>
+
       <div class="couple-grid">
         <div class="person-card reveal-left">
           <div class="portrait-arch">
@@ -464,7 +1261,7 @@ footer .container { padding-bottom: 130px; }
             <span id="in_pria"></span>
           </div>
           <span class="eyebrow" style="margin-bottom:6px">Mempelai Pria</span>
-          <h3 class="person-name" data-k="pria_nama"></h3>
+          <h2 class="person-name" data-k="pria_nama"></h2>
           <p class="person-parents" data-k="pria_ortu"></p>
         </div>
 
@@ -476,7 +1273,7 @@ footer .container { padding-bottom: 130px; }
             <span id="in_wanita"></span>
           </div>
           <span class="eyebrow" style="margin-bottom:6px">Mempelai Wanita</span>
-          <h3 class="person-name" data-k="wanita_nama"></h3>
+          <h2 class="person-name" data-k="wanita_nama"></h2>
           <p class="person-parents" data-k="wanita_ortu"></p>
         </div>
       </div>
@@ -494,7 +1291,13 @@ footer .container { padding-bottom: 130px; }
     <div class="container reveal-scale">
       <div class="verse-box">
         <span class="eyebrow">Firman Allah Subhanahu wa Ta’ala</span>
-<!-- ... existing code ... -->
+        <p class="ar" lang="ar" dir="rtl">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِقَوْمٍ يَتَفَكَّرُونَ</p>
+        <p class="verse-trans">“Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antara kamu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.”</p>
+        <p class="src" style="color:var(--gold);margin:0">QS. Ar-Rum: 21</p>
+      </div>
+    </div>
+  </section>
+
   <!-- =========================================================
        5. WAKTU & RANGKAIAN ACARA (WARM IVORY)
        ========================================================= -->
@@ -509,7 +1312,7 @@ footer .container { padding-bottom: 130px; }
         <div class="stagger-item"><b>00</b>Detik</div>
       </div>
 
-      <p class="muted" style="max-width:460px;margin:0 auto 24px">Dengan memohon rahmat dan ridha Allah Subhanahu wa Ta’ala, insyaAllah kami akan menyelenggarakan rangkaian acara pernikahan:</p>
+      <p class="muted" style="max-width:460px;margin:0 auto 24px">Dengan memohon rahmat dan ridha Allah Subhanahu wa Ta’ala, insyaAllah kami akan menyelenggarakan acara pernikahan:</p>
 
       <div class="event-card reveal">
         <span class="eyebrow" style="margin-bottom:6px">Rangkaian Pertama</span>
@@ -547,13 +1350,23 @@ footer .container { padding-bottom: 130px; }
       <div class="heritage-frame">
         <span class="eyebrow">Warisan Moloku Kie Raha</span>
         <h2 class="title-editorial">Adat Pernikahan Ternate</h2>
-<!-- ... existing code ... -->
+        <div class="kie-divider" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12,1 14.8,9.2 23,12 14.8,14.8 12,23 9.2,14.8 1,12 9.2,9.2"/></svg>
+        </div>
+        <p class="muted" style="max-width:480px;margin:0 auto" data-k="adat"></p>
+        <div class="motto-banner">
+          <p class="script-title" style="font-size:2.7rem;margin:0 0 4px">Marimoi ngone futuru</p>
+          <p class="src" style="letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin:0">Bersatu kita teguh</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- =========================================================
-       7. RANGKAIAN PROSESI & FILOSOFI ADAT (PENGGANTI GALERI)
+       7. RANGKAIAN PROSESI ADAT (PENGGANTI GALERI)
        ========================================================= -->
   <section class="sec-ivory" id="sprosesi">
     <div class="container reveal stagger-group">
-      <!-- Ornamen Botanikal Cengkih, Pala & Mahkota Moloku Kie Raha -->
       <svg class="botanical-crest" viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">
         <path d="M60 8 L64 20 L76 24 L64 28 L60 40 L56 28 L44 24 L56 20 Z"/>
         <circle cx="60" cy="24" r="3.5"/>
@@ -662,7 +1475,57 @@ footer .container { padding-bottom: 130px; }
 
       <div class="rsvp-box reveal-scale">
         <label for="nama">Nama Lengkap</label>
-<!-- ... existing code ... -->
+        <input id="nama" type="text" autocomplete="name" placeholder="Tulis nama Anda">
+
+        <label for="hadir">Konfirmasi Kehadiran</label>
+        <select id="hadir">
+          <option>Hadir</option>
+          <option>Belum bisa hadir</option>
+        </select>
+
+        <label for="jml">Jumlah Tamu</label>
+        <input id="jml" type="number" min="1" max="10" value="1">
+
+        <label for="pesan">Ucapan dan Doa</label>
+        <textarea id="pesan" placeholder="Tuliskan doa dan ucapan selamat untuk kedua mempelai..."></textarea>
+
+        <p style="margin-top:20px;text-align:center">
+          <button class="btn btn-gold" id="kirim" onclick="kirim()">Kirim Ucapan &amp; Konfirmasi</button>
+        </p>
+        <p class="muted" id="ok" hidden style="text-align:center;color:var(--gold-dark);font-weight:600">Terima kasih, konfirmasi Anda sudah kami terima.</p>
+      </div>
+
+      <div id="ucapan" style="margin-top:24px"></div>
+      <div class="pg" id="pg" hidden>
+        <button class="btn" onclick="WP--;wish()">Sebelumnya</button>
+        <span id="pgn" class="muted"></span>
+        <button class="btn" onclick="WP++;wish()">Berikutnya</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       10. BUAT LINK KHUSUS TAMU (#buat-link)
+       ========================================================= -->
+  <section class="sec-ivory" id="kelola" hidden style="border-top:1px solid var(--ivory-line)">
+    <div class="container">
+      <span class="eyebrow">Generator Link Tamu</span>
+      <h2 class="title-editorial">Buat Link untuk Tamu</h2>
+      <p class="muted">Tulis satu nama tamu per baris. Setiap tamu mendapat link sendiri yang menampilkan namanya di sampul undangan.</p>
+      <div class="rsvp-box">
+        <label for="base">Link Undangan</label>
+        <input id="base" type="text">
+        <label for="daftar">Daftar Nama Tamu</label>
+        <textarea id="daftar" placeholder="Bapak Ahmad&#10;Ibu Siti dan keluarga"></textarea>
+        <p style="margin-top:18px;text-align:center">
+          <button class="btn btn-gold" onclick="buatLink()">Buat Link Tamu</button>
+        </p>
+        <div id="hasil" style="margin-top:16px"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
 <!-- =========================================================
      FOOTER DOA PENGANTIN (EMERALD DARK)
      ========================================================= -->
@@ -680,7 +1543,21 @@ footer .container { padding-bottom: 130px; }
 <!-- =========================================================
      MODAL PANEL ADMIN (#admin)
      ========================================================= -->
-<!-- ... existing code ... -->
+<div class="adm" id="admin" hidden>
+  <div class="in">
+    <p style="text-align:right;margin:0"><a class="btn" href="#">Tutup</a></p>
+    <span class="eyebrow">Pengaturan Undangan</span>
+    <h2 class="title-editorial" style="font-size:1.85rem">Kelola Undangan</h2>
+    <div id="login">
+      <label for="sandi">Kata sandi admin</label>
+      <input id="sandi" type="password" autocomplete="current-password">
+      <p class="src" id="lmsg" style="margin-top:8px;color:var(--gold)"></p>
+      <button class="btn btn-gold" style="margin-top:12px" onclick="masuk()">Masuk</button>
+    </div>
+    <div id="panel" hidden>
+      <div id="form"></div>
+      <p><button class="btn btn-gold" onclick="simpan()">Simpan Perubahan</button></p>
+      <p class="src" id="smsg" style="color:var(--gold)"></p>
       <h2 class="title-editorial" style="font-size:1.6rem;margin-top:42px">Daftar Kehadiran (RSVP)</h2>
       <p class="muted" id="rsum"></p>
       <div id="rsvp"></div>
@@ -692,23 +1569,43 @@ footer .container { padding-bottom: 130px; }
 // Tempel alamat Web App dari Google Apps Script di antara tanda kutip (lihat panduan).
 var API='https://script.google.com/macros/s/AKfycbz4tBDEss9lgxswQUW-Ty760JqfSVoEM0EMEshc5W-dd9SGru4DnKnwZ3is_1txL8TT/exec';
 var K={resepsi_waktu:'2027-02-20T11:00:00+09:00',rek2_bank:'',rek2_no:'',pria_nama:'Adi Pratama',pria_panggilan:'Adi',pria_ortu:'Putra dari Bapak Nama Ayah dan Ibu Nama Ibu',wanita_nama:'Sinta Lestari',wanita_panggilan:'Sinta',wanita_ortu:'Putri dari Bapak Nama Ayah dan Ibu Nama Ibu',tanggal:'Sabtu, 20 Februari 2027',akad_waktu:'2027-02-20T08:00:00+09:00',akad_teks:'Sabtu, 20 Februari 2027, 08.00 WIT',akad_tempat:'Nama Tempat, alamat lengkap',akad_peta:'https://www.google.com/maps',resepsi_teks:'Sabtu, 20 Februari 2027, 11.00 WIT hingga selesai',resepsi_tempat:'Nama Gedung, alamat lengkap',resepsi_peta:'https://www.google.com/maps',adat:'Pernikahan kami dirangkai dengan adat Ternate. Sebelum hari akad, kedua keluarga berkumpul dalam antar balanja untuk bermusyawarah. Pada hari pernikahan, keluarga dan tamu duduk bersama menyantap makan saro, jamuan adat yang menjadi tanda kebersamaan.',wa:'6281234567890',rek_bank:'Bank Contoh, atas nama Adi Pratama',rek_no:'1234567890'};
-var T=0;function $(i){return document.getElementById(i)}
-function kal(w,t,l){var s=new Date(w);if(isNaN(s))return '#';var f=function(d){return d.toISOString().replace(/[-:]|\.\d{3}/g,'')};
-  return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(t)+'&dates='+f(s)+'/'+f(new Date(s.getTime()+108e5))+'&location='+encodeURIComponent(l||'')}
-function go(i){var e=$(i);if(e)e.scrollIntoView({behavior:'smooth'})}
+var T=0;
+function $(i){return document.getElementById(i)}
+
+function kal(w,t,l){
+  var s=new Date(w);if(isNaN(s))return '#';
+  var f=function(d){return d.toISOString().replace(/[-:]|\.\d{3}/g,'')};
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(t)+'&dates='+f(s)+'/'+f(new Date(s.getTime()+108e5))+'&location='+encodeURIComponent(l||'');
+}
+
+function go(i){
+  var e=$(i);
+  if(e)e.scrollIntoView({behavior:'smooth'});
+}
+
 function paint(){
   document.querySelectorAll('[data-k]').forEach(function(e){e.textContent=K[e.dataset.k]||''});
   document.querySelectorAll('[data-h]').forEach(function(e){e.href=K[e.dataset.h]||'#'});
   document.querySelectorAll('[data-bg]').forEach(function(e){var f=K[e.dataset.bg];e.style.backgroundImage=f?"url('"+f+"')":''});
-  var nm=K.pria_panggilan+' & '+K.wanita_panggilan;document.title='Undangan Pernikahan '+nm;
+  var nm=K.pria_panggilan+' & '+K.wanita_panggilan;
+  document.title='Undangan Pernikahan '+nm;
   T=new Date(K.akad_waktu).getTime();
-  ['pria','wanita'].forEach(function(p){var im=$('pt_'+p),f=K['foto_'+p],n=$('in_'+p);im.hidden=!f;if(f)im.src=f;n.hidden=!!f;n.textContent=(K[p+'_panggilan']||'?').charAt(0)});
+  ['pria','wanita'].forEach(function(p){
+    var im=$('pt_'+p),f=K['foto_'+p],n=$('in_'+p);
+    im.hidden=!f;if(f)im.src=f;
+    n.hidden=!!f;n.textContent=(K[p+'_panggilan']||'?').charAt(0);
+  });
   $('kal1').href=kal(K.akad_waktu,'Akad nikah '+nm,K.akad_tempat);
-  $('kal2').hidden=!K.resepsi_waktu;if(K.resepsi_waktu)$('kal2').href=kal(K.resepsi_waktu,'Resepsi '+nm,K.resepsi_tempat);
+  $('kal2').hidden=!K.resepsi_waktu;
+  if(K.resepsi_waktu)$('kal2').href=kal(K.resepsi_waktu,'Resepsi '+nm,K.resepsi_tempat);
   $('bk2').hidden=!K.rek2_no;
-  $('au').src=K.musik||'';$('mus').hidden=!K.musik;
+  $('au').src=K.musik||'';
+  $('mus').hidden=!K.musik;
 }
-function tick(){var d=Math.max(0,T-Date.now()),v=[Math.floor(d/864e5),Math.floor(d/36e5)%24,Math.floor(d/6e4)%60,Math.floor(d/1e3)%60];
+
+function tick(){
+  var d=Math.max(0,T-Date.now());
+  var v=[Math.floor(d/864e5),Math.floor(d/36e5)%24,Math.floor(d/6e4)%60,Math.floor(d/1e3)%60];
   document.querySelectorAll('#cd b').forEach(function(e,i){
     var nv=String(v[i]||0).padStart(2,'0');
     if(e.textContent!==nv){
@@ -717,13 +1614,301 @@ function tick(){var d=Math.max(0,T-Date.now()),v=[Math.floor(d/864e5),Math.floor
       void e.offsetWidth;
       e.classList.add('tick-pop');
     }
-  })}
-function openInv(){$('cover').classList.add('open');document.body.classList.remove('locked');window.scrollTo(0,0);if(K.musik)$('au').play().then(function(){$('mus').classList.add('playing')}).catch(function(){})}
-<!-- ... existing code ... -->
-// Enhancement UI: Multi-Variant Scroll Reveal, Active Nav Scroll-Spy & Soft Hero Parallax
+  });
+}
+
+function revealAllNow(){
+  document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right').forEach(function(el){
+    el.classList.add('visible');
+  });
+}
+
+function openInv(){
+  $('cover').classList.add('open');
+  document.body.classList.remove('locked');
+  window.scrollTo(0,0);
+  if(K.musik){
+    $('au').play().then(function(){$('mus').classList.add('playing')}).catch(function(){});
+  }
+}
+
+function musik(){
+  var a=$('au'),b=$('mus');
+  if(a.paused){
+    a.play().then(function(){b.classList.add('playing')}).catch(function(){});
+  }else{
+    a.pause();
+    b.classList.remove('playing');
+  }
+}
+
+function wa(d){
+  var t='Halo, saya '+d.nama+'. Konfirmasi kehadiran: '+d.hadir+', jumlah tamu: '+d.jml+'.'+(d.pesan?' Ucapan: '+d.pesan:'');
+  window.open('https://wa.me/'+K.wa+'?text='+encodeURIComponent(t),'_blank','noopener');
+}
+
+function kirim(){
+  var n=$('nama');
+  if(!n.value.trim()){n.focus();return}
+  var d={nama:n.value.trim(),hadir:$('hadir').value,jml:$('jml').value,pesan:$('pesan').value.trim()};
+  if(API.indexOf('http')!==0){wa(d);return}
+  $('kirim').disabled=true;
+  fetch(API,{method:'POST',mode:'no-cors',body:JSON.stringify(d)}).then(function(){
+    $('ok').hidden=false;
+    $('pesan').value='';
+    $('kirim').disabled=false;
+    setTimeout(ucapan,1500);
+  }).catch(function(){
+    $('kirim').disabled=false;
+    wa(d);
+  });
+}
+
+var WL=[],WP=0;
+function ucapan(){
+  if(API.indexOf('http')!==0)return;
+  fetch(API+'?t=ucapan').then(function(r){return r.json()}).then(function(l){
+    WL=l.filter(function(x){return x.ucapan});
+    WP=0;
+    wish();
+  }).catch(function(){});
+}
+
+function wish(){
+  var b=$('ucapan'),per=5,max=Math.max(1,Math.ceil(WL.length/per));
+  WP=Math.min(Math.max(WP,0),max-1);
+  b.textContent='';
+  WL.slice(WP*per,WP*per+per).forEach(function(x){
+    var w=el('div','wish');
+    w.append(el('b',0,x.nama),el('p',0,x.ucapan));
+    b.appendChild(w);
+  });
+  $('pg').hidden=WL.length<=per;
+  $('pgn').textContent=(WP+1)+' / '+max;
+}
+
+function salin(no,b){
+  var t=b.textContent;
+  function ok(){b.textContent='Tersalin ✓';setTimeout(function(){b.textContent=t},2000)}
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(no).then(ok,function(){fallbackCopy(no,ok,b)});
+    }else{
+      fallbackCopy(no,ok,b);
+    }
+  }catch(e){b.textContent=no}
+}
+
+function fallbackCopy(text,onSuccess,btn){
+  var ta=document.createElement('textarea');
+  ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');onSuccess()}catch(e){btn.textContent=text}
+  document.body.removeChild(ta);
+}
+
+function route(){
+  var h=location.hash.slice(1),k=$('kelola');
+  $('admin').hidden=h!=='admin';
+  if(h==='admin'){
+    document.body.classList.remove('locked');
+    $('cover').classList.add('open');
+    revealAllNow();
+    return;
+  }
+  if(h==='buat-link'){
+    k.hidden=false;
+    openInv();
+    revealAllNow();
+    setTimeout(function(){k.scrollIntoView({behavior:'smooth'})},80);
+    return;
+  }
+  if(h.indexOf('tamu-')===0){
+    var nm=h.slice(5).split('-').filter(Boolean).map(function(w){
+      return w==='dan'?w:w.charAt(0).toUpperCase()+w.slice(1);
+    }).join(' ');
+    if(nm){$('guest').textContent=nm;$('nama').value=nm}
+  }
+}
+
+function slug(s){
+  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+}
+
+function buatLink(){
+  var base=$('base').value.trim().split('#')[0],box=$('hasil');
+  box.textContent='';
+  $('daftar').value.split('\n').forEach(function(n){
+    n=n.trim();if(!n)return;
+    var url=base+'#tamu-'+slug(n),row=document.createElement('div');
+    row.className='row';
+    var s=document.createElement('span');s.textContent=n;
+    var c=document.createElement('button');c.className='btn';c.textContent='Salin';
+    c.onclick=function(){salin(url,c)};
+    var w=document.createElement('a');w.className='btn';w.target='_blank';w.rel='noopener';w.textContent='WhatsApp';
+    w.href='https://wa.me/?text='+encodeURIComponent('Kepada Yth. '+n+', dengan hormat kami mengundang Anda ke pernikahan '+K.pria_panggilan+' & '+K.wanita_panggilan+'. Buka undangan: '+url);
+    row.append(s,c,w);
+    box.appendChild(row);
+  });
+}
+
+var S='',G=[
+  ['Pengantin Pria',[['pria_nama','Nama lengkap'],['pria_panggilan','Nama panggilan'],['pria_ortu','Orang tua','t']]],
+  ['Pengantin Wanita',[['wanita_nama','Nama lengkap'],['wanita_panggilan','Nama panggilan'],['wanita_ortu','Orang tua','t']]],
+  ['Akad Nikah',[['tanggal','Tanggal di sampul'],['akad_waktu','Waktu akad (WIT), dipakai untuk hitung mundur','d'],['akad_teks','Tulisan waktu akad'],['akad_tempat','Tempat dan alamat akad','t'],['akad_peta','Link Google Maps akad']]],
+  ['Resepsi',[['resepsi_waktu','Waktu resepsi (WIT), untuk tombol Simpan Tanggal','d'],['resepsi_teks','Tulisan waktu resepsi'],['resepsi_tempat','Tempat dan alamat resepsi','t'],['resepsi_peta','Link Google Maps resepsi']]],
+  ['Adat & Tanda Kasih',[['adat','Teks adat Ternate','t'],['wa','Nomor WhatsApp (awali 62)'],['rek_bank','Bank dan nama pemilik'],['rek_no','Nomor rekening'],['rek2_bank','Rekening 2: bank dan pemilik (opsional)'],['rek2_no','Rekening 2: nomor (opsional)']]]
+];
+
+function api(d,cb){
+  d.sandi=S;
+  fetch(API,{method:'POST',body:JSON.stringify(d)}).then(function(r){return r.json()}).then(cb).catch(function(){cb({ok:false,error:'jaringan'})});
+}
+
+function el(t,c,x){
+  var e=document.createElement(t);
+  if(c)e.className=c;
+  if(x)e.textContent=x;
+  return e;
+}
+
+function kecil(f,cb){
+  var r=new FileReader();
+  r.onload=function(){
+    var i=new Image();
+    i.onload=function(){
+      var s=Math.min(1,1200/Math.max(i.width,i.height)),c=el('canvas');
+      c.width=i.width*s;c.height=i.height*s;
+      c.getContext('2d').drawImage(i,0,0,c.width,c.height);
+      cb(c.toDataURL('image/jpeg',.8).split(',')[1]);
+    };
+    i.src=r.result;
+  };
+  r.readAsDataURL(f);
+}
+
+function slot(n,musik,lab){
+  var d=el('div','slot'),im=musik?null:new Image(),c=el('div'),inp=el('input'),st=el('p','src'),h=el('button','btn','Hapus');
+  var key=musik?'musik':(isNaN(n)?n:'foto'+n);
+  inp.type='file';inp.accept=musik?'audio/*':'image/*';st.style.margin='4px 0 0';
+  st.textContent=(lab||(musik?'Musik':'Foto'))+(K[key]?': terpasang':': kosong')+(musik?' (maks. 8 MB)':'');
+  if(im&&K[key])im.src=K[key];
+  h.onclick=function(){K[key]='';if(im)im.removeAttribute('src');st.textContent='Dihapus (belum disimpan)'};
+  function kirimFile(b64,nama,tipe){
+    api({aksi:'unggah',nama:nama,tipe:tipe,data:b64},function(r){
+      if(!r.ok){st.textContent='Gagal mengunggah';return}
+      K[key]=musik?'https://drive.google.com/uc?export=download&id='+r.id:'https://drive.google.com/thumbnail?id='+r.id+'&sz=w1200';
+      if(im)im.src=K[key];
+      st.textContent='Terunggah (belum disimpan)';
+    });
+  }
+  inp.onchange=function(){
+    var f=inp.files[0];if(!f)return;
+    if(musik){
+      if(f.size>8e6){st.textContent='File terlalu besar (maks. 8 MB)';return}
+      st.textContent='Mengunggah...';
+      var r=new FileReader();
+      r.onload=function(){kirimFile(r.result.split(',')[1],f.name,f.type||'audio/mpeg')};
+      r.readAsDataURL(f);
+    }else{
+      st.textContent='Mengunggah...';
+      kecil(f,function(b){kirimFile(b,key+'.jpg','image/jpeg')});
+    }
+  };
+  c.append(inp,st);
+  if(im)d.appendChild(im);
+  d.append(c,h);
+  return d;
+}
+
+function bangun(){
+  var f=$('form');f.textContent='';
+  G.forEach(function(g){
+    var fs=el('fieldset'),lg=el('legend',0,g[0]);
+    fs.appendChild(lg);
+    g[1].forEach(function(x){
+      var l=el('label',0,x[1]),i=el(x[2]==='t'?'textarea':'input');
+      l.htmlFor=i.id='f_'+x[0];
+      if(x[2]==='d'){i.type='datetime-local';i.value=(K[x[0]]||'').slice(0,16)}
+      else i.value=K[x[0]]||'';
+      fs.append(l,i);
+    });
+    f.appendChild(fs);
+  });
+  var fs=el('fieldset');
+  fs.appendChild(el('legend',0,'Foto Utama'));
+  [['foto_cover','Foto sampul'],['foto_pria','Foto pengantin pria'],['foto_wanita','Foto pengantin wanita']].forEach(function(p){
+    fs.appendChild(slot(p[0],0,p[1]));
+  });
+  f.appendChild(fs);
+  fs=el('fieldset');
+  fs.appendChild(el('legend',0,'Musik Latar'));
+  fs.appendChild(slot(0,1));
+  f.appendChild(fs);
+}
+
+function daftar(rows){
+  var b=$('rsvp'),h=0,t=0;b.textContent='';
+  rows.forEach(function(x){
+    t++;
+    if(x[2]==='Hadir')h+=Number(x[3])||1;
+    var r=el('div','rs');
+    r.appendChild(el('b',0,x[1]));
+    r.appendChild(el('span',0,x[2]+', '+x[3]+' orang'+(x[4]?'. '+x[4]:'')));
+    b.appendChild(r);
+  });
+  $('rsum').textContent=t?t+' konfirmasi masuk, '+h+' orang akan hadir.':'Belum ada konfirmasi masuk.';
+}
+
+function masuk(){
+  S=$('sandi').value;$('lmsg').textContent='Memeriksa...';
+  if(API.indexOf('http')!==0){$('lmsg').textContent='Alamat API belum diisi di index.html.';return}
+  api({aksi:'rsvp'},function(r){
+    if(!r.ok){$('lmsg').textContent=r.error==='sandi'?'Kata sandi salah.':'Tidak bisa terhubung ke Google Sheet.';return}
+    $('login').hidden=true;
+    $('panel').hidden=false;
+    bangun();
+    daftar(r.data);
+  });
+}
+
+function simpan(){
+  var o={};
+  G.forEach(function(g){
+    g[1].forEach(function(x){
+      var v=$('f_'+x[0]).value.trim();
+      if(x[2]==='d'&&v)v+=':00+09:00';
+      o[x[0]]=v;
+    });
+  });
+  ['foto_cover','foto_pria','foto_wanita','musik'].forEach(function(k){o[k]=K[k]||''});
+  $('smsg').textContent='Menyimpan...';
+  api({aksi:'simpan',data:o},function(r){
+    if(!r.ok){$('smsg').textContent='Gagal menyimpan.';return}
+    for(var k in o)K[k]=o[k];
+    paint();tick();
+    $('smsg').textContent='Tersimpan. Buka undangan untuk melihat hasilnya.';
+  });
+}
+
+paint();tick();setInterval(tick,1000);
+$('base').value=location.href.split('#')[0];
+window.addEventListener('hashchange',route);
+route();
+
+if(API.indexOf('http')===0){
+  fetch(API+'?t=config').then(function(r){return r.json()}).then(function(o){
+    for(var k in o){if(o[k]!=='')K[k]=o[k]}
+    paint();tick();
+  }).catch(function(){});
+  ucapan();
+}
+
+// Progressive Scroll Reveal & Scroll-Spy Navigation (Anti-Stuck)
 (function(){
   var revSelectors='.reveal, .reveal-scale, .reveal-left, .reveal-right';
   if('IntersectionObserver' in window){
+    document.documentElement.classList.add('js-anim');
     var revObs=new IntersectionObserver(function(entries){
       entries.forEach(function(en){
         if(en.isIntersecting){
@@ -731,8 +1916,11 @@ function openInv(){$('cover').classList.add('open');document.body.classList.remo
           revObs.unobserve(en.target);
         }
       });
-    },{threshold:0.12,rootMargin:'0px 0px -30px 0px'});
+    },{threshold:0.08,rootMargin:'0px 0px -20px 0px'});
     document.querySelectorAll(revSelectors).forEach(function(el){revObs.observe(el)});
+
+    // Failsafe timer: pastikan semua elemen selalu terlihat setelah 2.5 detik jika observer terlewat
+    setTimeout(revealAllNow,2500);
 
     var navObs=new IntersectionObserver(function(entries){
       entries.forEach(function(en){
@@ -743,24 +1931,10 @@ function openInv(){$('cover').classList.add('open');document.body.classList.remo
           });
         }
       });
-    },{rootMargin:'-38% 0px -52% 0px'});
-    ['home','mempelai','tanggal','sprosesi','sucapan'].forEach(function(id){var s=$(id);if(s)navObs.observe(s)});
-  } else {
-    document.querySelectorAll(revSelectors).forEach(function(el){el.classList.add('visible')});
-  }
-
-  // Subtle Parallax on Hero Center Content
-  var heroCenter=document.querySelector('.hero-center');
-  var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(heroCenter && !reduceMotion){
-    window.addEventListener('scroll',function(){
-      if(document.body.classList.contains('locked'))return;
-      var y=window.scrollY;
-      if(y<window.innerHeight){
-        heroCenter.style.transform='translateY('+(y*0.22)+'px)';
-        heroCenter.style.opacity=Math.max(0,1-(y/(window.innerHeight*0.85)));
-      }
-    },{passive:true});
+    },{rootMargin:'-35% 0px -50% 0px'});
+    ['home','mempelai','tanggal','sprosesi','sucapan'].forEach(function(id){
+      var s=$(id);if(s)navObs.observe(s);
+    });
   }
 })();
 </script>
