@@ -1,5 +1,5 @@
 // GANTI kata sandi ini sebelum menerbitkan. Kata sandi hanya disimpan di sini, bukan di index.html.
-var ADMIN_PASSWORD = 'GANTI_KATA_SANDI';
+var ADMIN_PASSWORD = 'acilkong';
 
 var DEF = [
   ['pria_nama', 'Adi Pratama'],
