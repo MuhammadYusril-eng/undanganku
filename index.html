@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Undangan Pernikahan</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;1,500&family=Figtree:wght@400;500&family=Amiri:wght@400&display=swap">
+<style>
+:root{--bg:#eef2ef;--ink:#123a35;--muted:#58716c;--brass:#8f6f2c;--line:#c3d1ca;--field:#fff;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root{--bg:#0d2623;--ink:#ece6d6;--muted:#9db3ad;--brass:#d2b06a;--line:#25423d;--field:#14332f;color-scheme:dark}}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.7 Figtree,system-ui,sans-serif}
+body.locked{overflow:hidden}
+h1,h2,h3,.disp{font-family:'Bodoni Moda',Didot,Georgia,serif;font-weight:500;margin:0}
+section{max-width:560px;margin:0 auto;padding:64px 24px;text-align:center;border-bottom:1px solid var(--line)}
+h2{font-size:1.9rem;line-height:1.2;margin-bottom:20px}p{margin:0 0 12px}.muted{color:var(--muted)}.src{font-size:.85rem;color:var(--muted)}
+.ar{font:400 1.7rem/2.2 Amiri,'Noto Naskh Arabic',serif;margin:18px 0}
+.cover{position:fixed;inset:0;z-index:10;background:#0f2f2b;color:#f1ead8;display:flex;align-items:center;justify-content:center;padding:calc(24px + env(safe-area-inset-top,0px)) 24px calc(24px + env(safe-area-inset-bottom,0px));overflow:auto}
+.cover.open{transform:translateY(-100%);visibility:hidden;transition:transform .9s cubic-bezier(.7,0,.2,1),visibility 0s .9s}
+.arch{width:min(80vw,330px);border:1px solid #d2b06a;border-radius:999px 999px 0 0;padding:72px 20px 44px;text-align:center}
+.arch .small,.arch .to{font-size:.9rem;color:#cfc8b4;margin-bottom:20px}
+.arch .to b{display:block;font:500 1.15rem Figtree,sans-serif;color:#f1ead8}
+.names{font-size:clamp(3rem,17vw,4.6rem);line-height:.95}
+.amp{display:block;font-style:italic;font-size:1.8rem;color:#d2b06a;margin:6px 0}
+.btn{display:inline-block;border:1px solid var(--brass);color:var(--ink);background:transparent;padding:10px 26px;border-radius:999px;font:500 .95rem Figtree,sans-serif;text-decoration:none;cursor:pointer}
+.btn:hover{background:var(--brass);color:var(--bg)}
+.cover .btn{border-color:#d2b06a;color:#f1ead8}.cover .btn:hover{background:#d2b06a;color:#0f2f2b}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.person h2{font-size:2.2rem;margin-bottom:6px}.amp2{font:italic 500 2rem 'Bodoni Moda',Georgia,serif;color:var(--brass);margin:18px 0}
+#cd{display:flex;justify-content:center;gap:10px}
+#cd div{flex:1;max-width:96px;border-top:2px solid var(--brass);padding-top:10px;color:var(--muted);font-size:.85rem}
+#cd b{display:block;font:500 2rem 'Bodoni Moda',Georgia,serif;color:var(--ink)}
+#galeri{display:grid;grid-template-columns:1fr 1fr;gap:8px}#galeri img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:8px}
+.ev{padding:26px 0;border-top:1px solid var(--line)}.ev:first-of-type{border-top:0}.ev h3{font-size:1.4rem;color:var(--brass);margin-bottom:8px}
+label{display:block;text-align:left;font-size:.9rem;color:var(--muted);margin:14px 0 4px}
+input,select,textarea{width:100%;font:inherit;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+textarea{min-height:90px;resize:vertical}
+.bank{border:1px solid var(--line);border-radius:8px;padding:16px;margin-top:16px}.bank .no{font:500 1.3rem 'Bodoni Moda',Georgia,serif;margin:6px 0 12px}
+.wish{text-align:left;padding:10px 0;border-top:1px solid var(--line)}.wish b{display:block}.wish p{margin:0;color:var(--muted)}
+.row{display:flex;gap:8px;align-items:center;padding:10px 0;border-top:1px solid var(--line);text-align:left}.row span{flex:1}.row .btn{padding:6px 14px;font-size:.85rem}
+#mus{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:5;width:44px;height:44px;border-radius:50%;border:1px solid var(--brass);background:var(--bg);color:var(--ink);cursor:pointer;font-size:1.1rem}
+footer{max-width:560px;margin:0 auto;padding:48px 24px 72px;text-align:center}
+.adm{position:fixed;inset:0;z-index:20;background:var(--bg);overflow:auto;padding:calc(24px + env(safe-area-inset-top,0px)) 20px calc(40px + env(safe-area-inset-bottom,0px))}
+.adm .in{max-width:560px;margin:auto;text-align:left}.adm h2{font-size:1.6rem}
+.adm fieldset{border:1px solid var(--line);border-radius:8px;margin:20px 0;padding:4px 16px 16px}
+.adm legend{font:500 1.1rem 'Bodoni Moda',Georgia,serif;padding:0 8px;color:var(--brass)}
+.slot{display:flex;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.slot img{width:56px;height:72px;object-fit:cover;border-radius:6px;background:var(--line)}.slot div{flex:1;min-width:0}.slot input{padding:6px}
+.rs{padding:8px 0;border-top:1px solid var(--line)}.rs b{display:block}.rs span{color:var(--muted);font-size:.9rem}
+@media(prefers-reduced-motion:reduce){.cover.open{transition:none}}
+</style>
+</head>
+<body class="locked">
+<div class="cover" id="cover"><div class="arch">
+  <p class="small">Undangan pernikahan</p>
+  <h1 class="names disp"><span data-k="pria_panggilan"></span><span class="amp">&amp;</span><span data-k="wanita_panggilan"></span></h1>
+  <p style="margin:28px 0 20px" data-k="tanggal"></p>
+  <p class="to">Kepada Yth.<b id="guest">Bapak/Ibu/Saudara/i</b></p>
+  <button class="btn" onclick="openInv()">Buka undangan</button>
+</div></div>
+<button id="mus" hidden onclick="musik()" aria-label="Putar atau jeda musik">♪</button>
+<audio id="au" loop preload="none"></audio>
+<main>
+<section>
+  <p class="disp" style="font-size:1.3rem;color:var(--brass)">Bismillahirrahmanirrahim</p>
+  <p>Assalamu’alaikum warahmatullahi wabarakatuh</p>
+  <p class="ar" lang="ar" dir="rtl">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِقَوْمٍ يَتَفَكَّرُونَ</p>
+  <p class="muted">“Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antara kamu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.”</p>
+  <p class="src">QS. Ar-Rum: 21</p>
+  <p style="margin-top:36px">Dengan memohon rahmat dan ridha Allah SWT, kami bermaksud menyelenggarakan pernikahan putra-putri kami.</p>
+</section>
+<section>
+  <div class="person"><h2 data-k="pria_nama"></h2><p class="muted" data-k="pria_ortu"></p></div>
+  <p class="amp2">dan</p>
+  <div class="person"><h2 data-k="wanita_nama"></h2><p class="muted" data-k="wanita_ortu"></p></div>
+</section>
+<section><h2>Menghitung hari</h2><div id="cd"><div><b>00</b>hari</div><div><b>00</b>jam</div><div><b>00</b>menit</div><div><b>00</b>detik</div></div></section>
+<section id="sgal" hidden><h2>Galeri kami</h2><div id="galeri"></div></section>
+<section>
+  <h2>Waktu dan tempat</h2>
+  <div class="ev"><h3>Akad nikah</h3><p style="font-weight:500" data-k="akad_teks"></p><p class="muted" data-k="akad_tempat"></p><a class="btn" data-h="akad_peta" target="_blank" rel="noopener">Lihat peta</a></div>
+  <div class="ev"><h3>Resepsi</h3><p style="font-weight:500" data-k="resepsi_teks"></p><p class="muted" data-k="resepsi_tempat"></p><a class="btn" data-h="resepsi_peta" target="_blank" rel="noopener">Lihat peta</a></div>
+</section>
+<section><h2>Adat Ternate</h2><p class="muted" data-k="adat"></p>
+  <p class="disp" style="font-size:1.5rem;color:var(--brass);margin-top:28px">Marimoi ngone futuru</p><p class="muted">Bersatu kita teguh</p></section>
+<section>
+  <h2>Konfirmasi kehadiran</h2>
+  <label for="nama">Nama</label><input id="nama" type="text" autocomplete="name">
+  <label for="hadir">Kehadiran</label><select id="hadir"><option>Hadir</option><option>Belum bisa hadir</option></select>
+  <label for="jml">Jumlah tamu</label><input id="jml" type="number" min="1" max="10" value="1">
+  <label for="pesan">Ucapan dan doa</label><textarea id="pesan"></textarea>
+  <p style="margin-top:20px"><button class="btn" id="kirim" onclick="kirim()">Kirim konfirmasi</button></p>
+  <p class="muted" id="ok" hidden>Terima kasih, konfirmasi Anda sudah kami terima.</p>
+  <div id="ucapan" style="margin-top:28px"></div>
+</section>
+<section>
+  <h2>Tanda kasih</h2>
+  <p class="muted">Kehadiran dan doa Anda sudah menjadi hadiah terindah. Bila ingin memberi tanda kasih, Anda bisa mengirimnya ke rekening berikut.</p>
+  <div class="bank"><p class="muted" style="margin:0" data-k="rek_bank"></p><p class="no" id="rek" data-k="rek_no"></p><button class="btn" id="salin" onclick="salin()">Salin nomor</button></div>
+</section>
+<section id="kelola" hidden>
+  <h2>Buat link untuk tamu</h2>
+  <p class="muted">Tulis satu nama tamu per baris. Setiap tamu mendapat link sendiri yang menampilkan namanya di halaman awal.</p>
+  <label for="base">Link undangan</label><input id="base" type="text">
+  <label for="daftar">Nama tamu</label><textarea id="daftar" placeholder="Bapak Ahmad&#10;Ibu Siti dan keluarga"></textarea>
+  <button class="btn" style="margin-top:20px" onclick="buatLink()">Buat link</button><div id="hasil" style="margin-top:20px"></div>
+</section>
+</main>
+<footer>
+  <p class="ar" lang="ar" dir="rtl" style="font-size:1.5rem">بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
+  <p class="muted">Semoga Allah memberkahimu, melimpahkan keberkahan atasmu, dan mengumpulkan kalian berdua dalam kebaikan.</p>
+  <p class="src" style="margin-bottom:36px">Doa untuk pengantin, HR. Abu Dawud dan at-Tirmidzi</p>
+  <p class="muted">Merupakan kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.</p>
+  <p>Wassalamu’alaikum warahmatullahi wabarakatuh</p>
+  <p class="disp" style="font-size:1.8rem;color:var(--brass)"><span data-k="pria_panggilan"></span> &amp; <span data-k="wanita_panggilan"></span></p>
+</footer>
+<div class="adm" id="admin" hidden><div class="in">
+  <p style="text-align:right;margin:0"><a class="btn" href="#">Tutup</a></p>
+  <h2>Kelola undangan</h2>
+  <div id="login"><label for="sandi">Kata sandi admin</label><input id="sandi" type="password" autocomplete="current-password">
+    <p class="src" id="lmsg"></p><button class="btn" onclick="masuk()">Masuk</button></div>
+  <div id="panel" hidden>
+    <div id="form"></div>
+    <p><button class="btn" onclick="simpan()">Simpan perubahan</button></p><p class="src" id="smsg"></p>
+    <h2 style="margin-top:36px">Daftar kehadiran</h2><p class="muted" id="rsum"></p><div id="rsvp"></div>
+  </div>
+</div></div>
+<script>
+// Tempel alamat Web App dari Google Apps Script di antara tanda kutip (lihat panduan).
+var API='';
+var K={pria_nama:'Adi Pratama',pria_panggilan:'Adi',pria_ortu:'Putra dari Bapak Nama Ayah dan Ibu Nama Ibu',wanita_nama:'Sinta Lestari',wanita_panggilan:'Sinta',wanita_ortu:'Putri dari Bapak Nama Ayah dan Ibu Nama Ibu',tanggal:'Sabtu, 20 Februari 2027',akad_waktu:'2027-02-20T08:00:00+09:00',akad_teks:'Sabtu, 20 Februari 2027, 08.00 WIT',akad_tempat:'Nama Tempat, alamat lengkap',akad_peta:'https://www.google.com/maps',resepsi_teks:'Sabtu, 20 Februari 2027, 11.00 WIT hingga selesai',resepsi_tempat:'Nama Gedung, alamat lengkap',resepsi_peta:'https://www.google.com/maps',adat:'Pernikahan kami dirangkai dengan adat Ternate. Sebelum hari akad, kedua keluarga berkumpul dalam antar balanja untuk bermusyawarah. Pada hari pernikahan, keluarga dan tamu duduk bersama menyantap makan saro, jamuan adat yang menjadi tanda kebersamaan.',wa:'6281234567890',rek_bank:'Bank Contoh, atas nama Adi Pratama',rek_no:'1234567890'};
+var T=0;function $(i){return document.getElementById(i)}
+function paint(){
+  document.querySelectorAll('[data-k]').forEach(function(e){e.textContent=K[e.dataset.k]||''});
+  document.querySelectorAll('[data-h]').forEach(function(e){e.href=K[e.dataset.h]||'#'});
+  document.title='Undangan Pernikahan '+K.pria_panggilan+' & '+K.wanita_panggilan;
+  T=new Date(K.akad_waktu).getTime();
+  var g=$('galeri'),n=0;g.textContent='';
+  for(var i=1;i<=6;i++){var f=K['foto'+i];if(f){var im=new Image();im.src=f;im.alt='Foto '+i;im.loading='lazy';g.appendChild(im);n++}}
+  $('sgal').hidden=!n;$('au').src=K.musik||'';$('mus').hidden=!K.musik;
+}
+function tick(){var d=Math.max(0,T-Date.now()),v=[Math.floor(d/864e5),Math.floor(d/36e5)%24,Math.floor(d/6e4)%60,Math.floor(d/1e3)%60];
+  document.querySelectorAll('#cd b').forEach(function(e,i){e.textContent=String(v[i]||0).padStart(2,'0')})}
+function openInv(){$('cover').classList.add('open');document.body.classList.remove('locked');window.scrollTo(0,0);if(K.musik)$('au').play().catch(function(){})}
+function musik(){var a=$('au');a.paused?a.play():a.pause()}
+function wa(d){var t='Halo, saya '+d.nama+'. Konfirmasi kehadiran: '+d.hadir+', jumlah tamu: '+d.jml+'.'+(d.pesan?' Ucapan: '+d.pesan:'');window.open('https://wa.me/'+K.wa+'?text='+encodeURIComponent(t),'_blank','noopener')}
+function kirim(){
+  var n=$('nama');if(!n.value.trim()){n.focus();return}
+  var d={nama:n.value.trim(),hadir:$('hadir').value,jml:$('jml').value,pesan:$('pesan').value.trim()};
+  if(API.indexOf('http')!==0){wa(d);return}
+  $('kirim').disabled=true;
+  fetch(API,{method:'POST',mode:'no-cors',body:JSON.stringify(d)}).then(function(){$('ok').hidden=false;$('pesan').value='';$('kirim').disabled=false;setTimeout(ucapan,1500)})
+  .catch(function(){$('kirim').disabled=false;wa(d)});
+}
+function ucapan(){
+  if(API.indexOf('http')!==0)return;
+  fetch(API+'?t=ucapan').then(function(r){return r.json()}).then(function(l){
+    var b=$('ucapan');b.textContent='';
+    l.filter(function(x){return x.ucapan}).forEach(function(x){var w=document.createElement('div');w.className='wish';
+      var s=document.createElement('b');s.textContent=x.nama;var p=document.createElement('p');p.textContent=x.ucapan;w.append(s,p);b.appendChild(w)});
+  }).catch(function(){});
+}
+function salin(){var b=$('salin'),no=K.rek_no;function ok(){b.textContent='Nomor tersalin';setTimeout(function(){b.textContent='Salin nomor'},2000)}
+  try{navigator.clipboard.writeText(no).then(ok,function(){b.textContent='Salin manual: '+no})}catch(e){b.textContent='Salin manual: '+no}}
+function route(){
+  var h=location.hash.slice(1),k=$('kelola');
+  $('admin').hidden=h!=='admin';
+  if(h==='admin'){document.body.classList.remove('locked');$('cover').classList.add('open');return}
+  if(h==='buat-link'){k.hidden=false;openInv();setTimeout(function(){k.scrollIntoView()},50);return}
+  if(h.indexOf('tamu-')===0){var nm=h.slice(5).split('-').filter(Boolean).map(function(w){return w==='dan'?w:w.charAt(0).toUpperCase()+w.slice(1)}).join(' ');
+    if(nm){$('guest').textContent=nm;$('nama').value=nm}}
+}
+function slug(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')}
+function buatLink(){
+  var base=$('base').value.trim().split('#')[0],box=$('hasil');box.textContent='';
+  $('daftar').value.split('\n').forEach(function(n){n=n.trim();if(!n)return;
+    var url=base+'#tamu-'+slug(n),row=document.createElement('div');row.className='row';
+    var s=document.createElement('span');s.textContent=n;
+    var c=document.createElement('button');c.className='btn';c.textContent='Salin';
+    c.onclick=function(){try{navigator.clipboard.writeText(url);c.textContent='Tersalin'}catch(e){window.prompt('Salin link:',url)}};
+    var w=document.createElement('a');w.className='btn';w.target='_blank';w.rel='noopener';w.textContent='WhatsApp';
+    w.href='https://wa.me/?text='+encodeURIComponent('Kepada Yth. '+n+', dengan hormat kami mengundang Anda ke pernikahan '+K.pria_panggilan+' & '+K.wanita_panggilan+'. Buka undangan: '+url);
+    row.append(s,c,w);box.appendChild(row)});
+}
+var S='',G=[['Pengantin pria',[['pria_nama','Nama lengkap'],['pria_panggilan','Nama panggilan'],['pria_ortu','Orang tua','t']]],
+['Pengantin wanita',[['wanita_nama','Nama lengkap'],['wanita_panggilan','Nama panggilan'],['wanita_ortu','Orang tua','t']]],
+['Akad nikah',[['tanggal','Tanggal di sampul'],['akad_waktu','Waktu akad (WIT), dipakai untuk hitung mundur','d'],['akad_teks','Tulisan waktu akad'],['akad_tempat','Tempat dan alamat akad','t'],['akad_peta','Link Google Maps akad']]],
+['Resepsi',[['resepsi_teks','Tulisan waktu resepsi'],['resepsi_tempat','Tempat dan alamat resepsi','t'],['resepsi_peta','Link Google Maps resepsi']]],
+['Adat dan tanda kasih',[['adat','Teks adat Ternate','t'],['wa','Nomor WhatsApp (awali 62)'],['rek_bank','Bank dan nama pemilik'],['rek_no','Nomor rekening']]]];
+function api(d,cb){d.sandi=S;fetch(API,{method:'POST',body:JSON.stringify(d)}).then(function(r){return r.json()}).then(cb).catch(function(){cb({ok:false,error:'jaringan'})})}
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x)e.textContent=x;return e}
+function kecil(f,cb){var r=new FileReader();r.onload=function(){var i=new Image();i.onload=function(){var s=Math.min(1,1200/Math.max(i.width,i.height)),c=el('canvas');c.width=i.width*s;c.height=i.height*s;c.getContext('2d').drawImage(i,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.8).split(',')[1])};i.src=r.result};r.readAsDataURL(f)}
+function slot(n,musik){
+  var d=el('div','slot'),im=musik?null:new Image(),c=el('div'),inp=el('input'),st=el('p','src'),h=el('button','btn','Hapus'),key=musik?'musik':'foto'+n;
+  inp.type='file';inp.accept=musik?'audio/*':'image/*';st.style.margin='4px 0 0';
+  st.textContent=K[key]?'Terpasang':(musik?'Belum ada musik (maks. 8 MB)':'Foto '+n+' kosong');
+  if(im&&K[key])im.src=K[key];
+  h.onclick=function(){K[key]='';if(im)im.removeAttribute('src');st.textContent='Dihapus (belum disimpan)'};
+  function kirimFile(b64,nama,tipe){api({aksi:'unggah',nama:nama,tipe:tipe,data:b64},function(r){
+    if(!r.ok){st.textContent='Gagal mengunggah';return}
+    K[key]=musik?'https://drive.google.com/uc?export=download&id='+r.id:'https://drive.google.com/thumbnail?id='+r.id+'&sz=w1200';
+    if(im)im.src=K[key];st.textContent='Terunggah (belum disimpan)'})}
+  inp.onchange=function(){var f=inp.files[0];if(!f)return;
+    if(musik){if(f.size>8e6){st.textContent='File terlalu besar (maks. 8 MB)';return}st.textContent='Mengunggah...';
+      var r=new FileReader();r.onload=function(){kirimFile(r.result.split(',')[1],f.name,f.type||'audio/mpeg')};r.readAsDataURL(f)}
+    else{st.textContent='Mengunggah...';kecil(f,function(b){kirimFile(b,key+'.jpg','image/jpeg')})}};
+  c.append(inp,st);if(im)d.appendChild(im);d.append(c,h);return d}
+function bangun(){
+  var f=$('form');f.textContent='';
+  G.forEach(function(g){var fs=el('fieldset'),lg=el('legend',0,g[0]);fs.appendChild(lg);
+    g[1].forEach(function(x){var l=el('label',0,x[1]),i=el(x[2]==='t'?'textarea':'input');l.htmlFor=i.id='f_'+x[0];
+      if(x[2]==='d'){i.type='datetime-local';i.value=(K[x[0]]||'').slice(0,16)}else i.value=K[x[0]]||'';fs.append(l,i)});f.appendChild(fs)});
+  var fs=el('fieldset');fs.appendChild(el('legend',0,'Foto (maksimal 6)'));for(var n=1;n<=6;n++)fs.appendChild(slot(n,0));f.appendChild(fs);
+  fs=el('fieldset');fs.appendChild(el('legend',0,'Musik latar'));fs.appendChild(slot(0,1));f.appendChild(fs)}
+function daftar(rows){
+  var b=$('rsvp'),h=0,t=0;b.textContent='';
+  rows.forEach(function(x){t++;if(x[2]==='Hadir')h+=Number(x[3])||1;
+    var r=el('div','rs');r.appendChild(el('b',0,x[1]));r.appendChild(el('span',0,x[2]+', '+x[3]+' orang'+(x[4]?'. '+x[4]:'')));b.appendChild(r)});
+  $('rsum').textContent=t?t+' konfirmasi masuk, '+h+' orang akan hadir.':'Belum ada konfirmasi masuk.'}
+function masuk(){
+  S=$('sandi').value;$('lmsg').textContent='Memeriksa...';
+  if(API.indexOf('http')!==0){$('lmsg').textContent='Alamat API belum diisi di index.html.';return}
+  api({aksi:'rsvp'},function(r){
+    if(!r.ok){$('lmsg').textContent=r.error==='sandi'?'Kata sandi salah.':'Tidak bisa terhubung ke Google Sheet.';return}
+    $('login').hidden=true;$('panel').hidden=false;bangun();daftar(r.data)})}
+function simpan(){
+  var o={};G.forEach(function(g){g[1].forEach(function(x){var v=$('f_'+x[0]).value.trim();if(x[2]==='d'&&v)v+=':00+09:00';o[x[0]]=v})});
+  for(var n=1;n<=6;n++)o['foto'+n]=K['foto'+n]||'';o.musik=K.musik||'';
+  $('smsg').textContent='Menyimpan...';
+  api({aksi:'simpan',data:o},function(r){
+    if(!r.ok){$('smsg').textContent='Gagal menyimpan.';return}
+    for(var k in o)K[k]=o[k];paint();tick();$('smsg').textContent='Tersimpan. Buka undangan untuk melihat hasilnya.'})}
+paint();tick();setInterval(tick,1000);
+$('base').value=location.href.split('#')[0];
+window.addEventListener('hashchange',route);route();
+if(API.indexOf('http')===0){
+  fetch(API+'?t=config').then(function(r){return r.json()}).then(function(o){for(var k in o){if(o[k]!=='')K[k]=o[k]}paint();tick()}).catch(function(){});
+  ucapan();
+}
+</script>
+</body>
+</html>

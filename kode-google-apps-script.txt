@@ -1,0 +1,99 @@
+// GANTI kata sandi ini sebelum menerbitkan. Kata sandi hanya disimpan di sini, bukan di index.html.
+var ADMIN_PASSWORD = 'GANTI_KATA_SANDI';
+
+var DEF = [
+  ['pria_nama', 'Adi Pratama'],
+  ['pria_panggilan', 'Adi'],
+  ['pria_ortu', 'Putra dari Bapak Nama Ayah dan Ibu Nama Ibu'],
+  ['wanita_nama', 'Sinta Lestari'],
+  ['wanita_panggilan', 'Sinta'],
+  ['wanita_ortu', 'Putri dari Bapak Nama Ayah dan Ibu Nama Ibu'],
+  ['tanggal', 'Sabtu, 20 Februari 2027'],
+  ['akad_waktu', '2027-02-20T08:00:00+09:00'],
+  ['akad_teks', 'Sabtu, 20 Februari 2027, 08.00 WIT'],
+  ['akad_tempat', 'Nama Tempat, alamat lengkap'],
+  ['akad_peta', 'https://www.google.com/maps'],
+  ['resepsi_teks', 'Sabtu, 20 Februari 2027, 11.00 WIT hingga selesai'],
+  ['resepsi_tempat', 'Nama Gedung, alamat lengkap'],
+  ['resepsi_peta', 'https://www.google.com/maps'],
+  ['adat', 'Pernikahan kami dirangkai dengan adat Ternate. Sebelum hari akad, kedua keluarga berkumpul dalam antar balanja untuk bermusyawarah. Pada hari pernikahan, keluarga dan tamu duduk bersama menyantap makan saro, jamuan adat yang menjadi tanda kebersamaan.'],
+  ['wa', '6281234567890'],
+  ['rek_bank', 'Bank Contoh, atas nama Adi Pratama'],
+  ['rek_no', '1234567890'],
+  ['musik', ''],
+  ['foto1', ''], ['foto2', ''], ['foto3', ''], ['foto4', ''], ['foto5', ''], ['foto6', '']
+];
+
+// Jalankan SEKALI: membuat dua tab, Pengaturan dan RSVP.
+function setup() {
+  var ss = SpreadsheetApp.getActive();
+  var p = ss.getSheetByName('Pengaturan') || ss.insertSheet('Pengaturan');
+  if (p.getLastRow() === 0) {
+    p.getRange('B:B').setNumberFormat('@');
+    p.getRange(1, 1, DEF.length, 2).setValues(DEF);
+  }
+  var r = ss.getSheetByName('RSVP') || ss.insertSheet('RSVP');
+  if (r.getLastRow() === 0) r.appendRow(['Waktu', 'Nama', 'Kehadiran', 'Jumlah', 'Ucapan']);
+}
+
+function aman(x) {
+  x = String(x || '').slice(0, 500);
+  return /^[=+\-@]/.test(x) ? "'" + x : x;
+}
+
+function doGet(e) {
+  var ss = SpreadsheetApp.getActive(), out;
+  if (e.parameter.t === 'ucapan') {
+    out = ss.getSheetByName('RSVP').getDataRange().getValues().slice(1).reverse().slice(0, 30)
+      .map(function (r) { return { nama: r[1], hadir: r[2], ucapan: r[4] }; });
+  } else {
+    out = {};
+    ss.getSheetByName('Pengaturan').getDataRange().getValues().forEach(function (r) {
+      if (r[0]) out[r[0]] = String(r[1]);
+    });
+  }
+  return ContentService.createTextOutput(JSON.stringify(out)).setMimeType(ContentService.MimeType.JSON);
+}
+
+function j(o) {
+  return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  var d = JSON.parse(e.postData.contents), ss = SpreadsheetApp.getActive();
+
+  // Konfirmasi dari tamu (tanpa kata sandi)
+  if (!d.aksi) {
+    ss.getSheetByName('RSVP')
+      .appendRow([new Date(), aman(d.nama), aman(d.hadir), Number(d.jml) || 1, aman(d.pesan)]);
+    return j({ ok: true });
+  }
+
+  // Semua aksi di bawah ini khusus admin
+  if (!ADMIN_PASSWORD || ADMIN_PASSWORD === 'GANTI_KATA_SANDI' || d.sandi !== ADMIN_PASSWORD) {
+    return j({ ok: false, error: 'sandi' });
+  }
+
+  if (d.aksi === 'rsvp') {
+    return j({ ok: true, data: ss.getSheetByName('RSVP').getDataRange().getValues().slice(1).reverse() });
+  }
+
+  if (d.aksi === 'simpan') {
+    var p = ss.getSheetByName('Pengaturan'), rows = p.getDataRange().getValues();
+    Object.keys(d.data).forEach(function (k) {
+      var v = String(d.data[k]).slice(0, 1000), at = -1;
+      for (var i = 0; i < rows.length; i++) if (rows[i][0] === k) at = i + 1;
+      if (at < 0) { at = p.getLastRow() + 1; p.getRange(at, 1).setValue(k); }
+      p.getRange(at, 2).setNumberFormat('@').setValue(v);
+    });
+    return j({ ok: true });
+  }
+
+  if (d.aksi === 'unggah') {
+    var f = DriveApp.createFile(Utilities.newBlob(Utilities.base64Decode(d.data), d.tipe, d.nama));
+    f.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    return j({ ok: true, id: f.getId() });
+  }
+
+  return j({ ok: false });
+}
