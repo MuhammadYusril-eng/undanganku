@@ -1013,16 +1013,30 @@ textarea {
   border-radius: 50%;
   border: 1px solid var(--gold);
   background: rgba(11, 25, 21, 0.9);
-  color: var(--gold-bright);
+  color: var(--ink-light-muted);
   cursor: pointer;
   font-size: 1.15rem;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#mus.paused::after {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 1.5px;
+  background: var(--gold);
+  transform: rotate(-42deg);
+  border-radius: 2px;
 }
 
 #mus.playing {
+  color: var(--gold-bright);
+  border-color: var(--gold-bright);
+  box-shadow: 0 0 0 4px rgba(200, 162, 82, 0.16), 0 8px 24px rgba(0, 0, 0, 0.45);
   animation: spinDisk 6s linear infinite;
 }
 
@@ -1170,6 +1184,21 @@ html.js-anim .stagger-group.visible .stagger-item:nth-child(1) { transition-dela
 html.js-anim .stagger-group.visible .stagger-item:nth-child(2) { transition-delay: 0.16s; }
 html.js-anim .stagger-group.visible .stagger-item:nth-child(3) { transition-delay: 0.26s; }
 html.js-anim .stagger-group.visible .stagger-item:nth-child(4) { transition-delay: 0.36s; }
+
+/* Sembunyikan sementara data dinamis saat fetch API sedang berjalan di awal muat */
+html.api-loading [data-k],
+html.api-loading .hero-date-pill,
+html.api-loading .portrait-arch {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+html:not(.api-loading) [data-k],
+html:not(.api-loading) .hero-date-pill,
+html:not(.api-loading) .portrait-arch {
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .cover, .gate-left, .gate-right, .cover-arch, .hero, .particle {
@@ -1568,8 +1597,35 @@ html.js-anim .stagger-group.visible .stagger-item:nth-child(4) { transition-dela
 <script>
 // Tempel alamat Web App dari Google Apps Script di antara tanda kutip (lihat panduan).
 var API='https://script.google.com/macros/s/AKfycbz4tBDEss9lgxswQUW-Ty760JqfSVoEM0EMEshc5W-dd9SGru4DnKnwZ3is_1txL8TT/exec';
+var CACHE_KEY='UNDANGAN_CONFIG_CACHE_V1';
 var K={resepsi_waktu:'2027-02-20T11:00:00+09:00',rek2_bank:'',rek2_no:'',pria_nama:'Adi Pratama',pria_panggilan:'Adi',pria_ortu:'Putra dari Bapak Nama Ayah dan Ibu Nama Ibu',wanita_nama:'Sinta Lestari',wanita_panggilan:'Sinta',wanita_ortu:'Putri dari Bapak Nama Ayah dan Ibu Nama Ibu',tanggal:'Sabtu, 20 Februari 2027',akad_waktu:'2027-02-20T08:00:00+09:00',akad_teks:'Sabtu, 20 Februari 2027, 08.00 WIT',akad_tempat:'Nama Tempat, alamat lengkap',akad_peta:'https://www.google.com/maps',resepsi_teks:'Sabtu, 20 Februari 2027, 11.00 WIT hingga selesai',resepsi_tempat:'Nama Gedung, alamat lengkap',resepsi_peta:'https://www.google.com/maps',adat:'Pernikahan kami dirangkai dengan adat Ternate. Sebelum hari akad, kedua keluarga berkumpul dalam antar balanja untuk bermusyawarah. Pada hari pernikahan, keluarga dan tamu duduk bersama menyantap makan saro, jamuan adat yang menjadi tanda kebersamaan.',wa:'6281234567890',rek_bank:'Bank Contoh, atas nama Adi Pratama',rek_no:'1234567890'};
 var T=0;
+
+// Muat cache konfigurasi terakhir dari localStorage agar saat refresh langsung tampil nama asli tanpa "Adi & Sinta"
+(function loadCachedConfig(){
+  try{
+    var raw=localStorage.getItem(CACHE_KEY);
+    if(!raw)return;
+    var cached=JSON.parse(raw);
+    if(cached && typeof cached==='object'){
+      for(var k in cached){
+        if(cached[k]!=='')K[k]=cached[k];
+      }
+    }
+  }catch(e){}
+})();
+
+function saveCachedConfig(cfg){
+  try{
+    var merged={};
+    for(var k in K)merged[k]=K[k];
+    for(var prop in cfg){
+      if(cfg[prop]!=='')merged[prop]=cfg[prop];
+    }
+    localStorage.setItem(CACHE_KEY,JSON.stringify(merged));
+  }catch(e){}
+}
+
 function $(i){return document.getElementById(i)}
 
 function kal(w,t,l){
@@ -1601,6 +1657,7 @@ function paint(){
   $('bk2').hidden=!K.rek2_no;
   $('au').src=K.musik||'';
   $('mus').hidden=!K.musik;
+  syncMusicUI();
 }
 
 function tick(){
@@ -1627,20 +1684,46 @@ function openInv(){
   $('cover').classList.add('open');
   document.body.classList.remove('locked');
   window.scrollTo(0,0);
-  if(K.musik){
-    $('au').play().then(function(){$('mus').classList.add('playing')}).catch(function(){});
+}
+
+function syncMusicUI(){
+  var a=$('au'),b=$('mus');
+  if(!b||b.hidden)return;
+  var isPlaying=!a.paused && !a.ended && a.currentTime>=0 && a.readyState>0 && !a.muted;
+  if(a.paused){
+    b.classList.remove('playing');
+    b.classList.add('paused');
+    b.setAttribute('aria-pressed','false');
+    b.setAttribute('aria-label','Musik dijeda — tekan untuk memutar musik latar');
+    b.title='Musik dijeda (klik untuk memutar)';
+  }else if(isPlaying){
+    b.classList.remove('paused');
+    b.classList.add('playing');
+    b.setAttribute('aria-pressed','true');
+    b.setAttribute('aria-label','Musik sedang diputar — tekan untuk menjeda musik latar');
+    b.title='Musik sedang diputar (klik untuk menjeda)';
   }
 }
 
 function musik(){
-  var a=$('au'),b=$('mus');
+  var a=$('au');
+  if(!K.musik)return;
+  if(!a.src)a.src=K.musik;
   if(a.paused){
-    a.play().then(function(){b.classList.add('playing')}).catch(function(){});
+    a.play().then(function(){
+      syncMusicUI();
+    }).catch(function(){
+      syncMusicUI();
+    });
   }else{
     a.pause();
-    b.classList.remove('playing');
+    syncMusicUI();
   }
 }
+
+$('au').addEventListener('play',syncMusicUI);
+$('au').addEventListener('pause',syncMusicUI);
+$('au').addEventListener('ended',syncMusicUI);
 
 function wa(d){
   var t='Halo, saya '+d.nama+'. Konfirmasi kehadiran: '+d.hadir+', jumlah tamu: '+d.jml+'.'+(d.pesan?' Ucapan: '+d.pesan:'');
@@ -1648,20 +1731,13 @@ function wa(d){
 }
 
 function kirim(){
-  var n=$('nama');
-  if(!n.value.trim()){n.focus();return}
+  var n=$('nama');if(!n.value.trim()){n.focus();return}
   var d={nama:n.value.trim(),hadir:$('hadir').value,jml:$('jml').value,pesan:$('pesan').value.trim()};
   if(API.indexOf('http')!==0){wa(d);return}
   $('kirim').disabled=true;
   fetch(API,{method:'POST',mode:'no-cors',body:JSON.stringify(d)}).then(function(){
-    $('ok').hidden=false;
-    $('pesan').value='';
-    $('kirim').disabled=false;
-    setTimeout(ucapan,1500);
-  }).catch(function(){
-    $('kirim').disabled=false;
-    wa(d);
-  });
+    $('ok').hidden=false;$('pesan').value='';$('kirim').disabled=false;setTimeout(ucapan,1500);
+  }).catch(function(){$('kirim').disabled=false;wa(d)});
 }
 
 var WL=[],WP=0;
@@ -1886,6 +1962,7 @@ function simpan(){
   api({aksi:'simpan',data:o},function(r){
     if(!r.ok){$('smsg').textContent='Gagal menyimpan.';return}
     for(var k in o)K[k]=o[k];
+    saveCachedConfig(o);
     paint();tick();
     $('smsg').textContent='Tersimpan. Buka undangan untuk melihat hasilnya.';
   });
@@ -1897,10 +1974,20 @@ window.addEventListener('hashchange',route);
 route();
 
 if(API.indexOf('http')===0){
+  document.documentElement.classList.add('api-loading');
+  var revealTimer=setTimeout(function(){
+    document.documentElement.classList.remove('api-loading');
+  },1800);
   fetch(API+'?t=config').then(function(r){return r.json()}).then(function(o){
     for(var k in o){if(o[k]!=='')K[k]=o[k]}
+    saveCachedConfig(o);
     paint();tick();
-  }).catch(function(){});
+    clearTimeout(revealTimer);
+    document.documentElement.classList.remove('api-loading');
+  }).catch(function(){
+    clearTimeout(revealTimer);
+    document.documentElement.classList.remove('api-loading');
+  });
   ucapan();
 }
 
